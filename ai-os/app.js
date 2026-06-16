@@ -1182,6 +1182,41 @@ let currentStockPrice = 2382000;
 let stockBasePrice = 2288000;
 const stockHistory = [];
 const maxHistoryPoints = 15;
+let forceSimulationMode = false;
+
+function isKSTMarketOpen() {
+    const now = new Date();
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const kst = new Date(utc + (3600000 * 9));
+    const day = kst.getDay();
+    const hours = kst.getHours();
+    const minutes = kst.getMinutes();
+    if (day === 0 || day === 6) return false;
+    const timeVal = hours * 100 + minutes;
+    return timeVal >= 900 && timeVal <= 1530;
+}
+
+function updateMarketStatusUI() {
+    const open = isKSTMarketOpen();
+    const badges = document.querySelectorAll('.market-status-badge');
+    badges.forEach(badge => {
+        if (open) {
+            badge.textContent = '● 정규장';
+            badge.className = 'market-status-badge open';
+            badge.title = '한국 표준시(KST) 정규 거래 시간 내 실시간 시세 반영 중';
+        } else {
+            if (forceSimulationMode) {
+                badge.textContent = '● 장마감 (모의 변동)';
+                badge.className = 'market-status-badge closed simulation';
+                badge.title = '장 마감 상태이나 클릭하여 정적 시세로 전환';
+            } else {
+                badge.textContent = '● 장마감 (시세 고정)';
+                badge.className = 'market-status-badge closed';
+                badge.title = '정규장 마감 상태. 클릭하면 모의 변동 시뮬레이션이 활성화됩니다.';
+            }
+        }
+    });
+}
 
 // Initialize stock history
 for (let i = 0; i < maxHistoryPoints; i++) {
@@ -1202,6 +1237,11 @@ window.getCurrentStockPrice = () => currentStockPrice;
 window.getCurrentStockHistory = () => stockHistory;
 window.getCurrentStockBasePrice = () => stockBasePrice;
 window.getCurrentWeatherData = () => currentWeatherData;
+window.getForceSimulationMode = () => forceSimulationMode;
+window.toggleSimulationMode = () => {
+    forceSimulationMode = !forceSimulationMode;
+    updateMarketStatusUI();
+};
 
 // Weather Icon Mapping
 function getWeatherIconAndDesc(code, isNight) {
@@ -1350,6 +1390,7 @@ function updateStockChart() {
 }
 
 function tickStock() {
+    if (!isKSTMarketOpen() && !forceSimulationMode) return;
     const change = (Math.random() - 0.5) * 15000;
     currentStockPrice = Math.max(1500000, Math.min(3000000, currentStockPrice + change));
     currentStockPrice = Math.round(currentStockPrice / 1000) * 1000;
@@ -1774,4 +1815,14 @@ window.getCurrentNewsArticle = () => currentNewsArticle;
 fetchRealTimeWeather();
 fetchSKHynixPrice();
 fetchRealTimeNews();
+updateMarketStatusUI();
 setInterval(tickStock, 1000);
+
+document.addEventListener('click', (e) => {
+    const badge = e.target.closest('.market-status-badge');
+    if (badge) {
+        if (isKSTMarketOpen()) return;
+        forceSimulationMode = !forceSimulationMode;
+        updateMarketStatusUI();
+    }
+});

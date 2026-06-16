@@ -1022,6 +1022,30 @@ body.light-theme .context-tag {
 }
 
 .stock-company { font-size: 0.75rem; color: var(--text-secondary); }
+
+.market-status-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: background-color 0.2s, color 0.2s;
+    user-select: none;
+}
+.market-status-badge.open {
+    color: var(--success-color);
+    background-color: rgba(52, 168, 83, 0.15);
+}
+.market-status-badge.closed {
+    color: var(--text-secondary);
+    background-color: rgba(148, 163, 184, 0.15);
+}
+.market-status-badge.closed.simulation {
+    color: var(--warning-color);
+    background-color: rgba(251, 188, 5, 0.15);
+}
 .stock-price-group { text-align: right; }
 .stock-price { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 600; }
 
