@@ -148,16 +148,16 @@ const ACTION_RESPONSES = {
         html: `
             <h4>글라스 돔 건축 리조트 매칭</h4>
             <p>전세계 친환경 글라스 하우스 숙소 데이터베이스 분석 결과:</p>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
-                <li style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 8px; display: flex; justify-content: space-between;">
+            <ul class="modal-list">
+                <li class="modal-list-item">
                     <span>🌲 핀란드 버블 리조트 (Kakslauttanen)</span>
                     <strong style="color: var(--primary-color);">94% 일치</strong>
                 </li>
-                <li style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 8px; display: flex; justify-content: space-between;">
+                <li class="modal-list-item">
                     <span>🌴 코스타리카 바이오스피어 돔</span>
                     <strong style="color: var(--primary-color);">89% 일치</strong>
                 </li>
-                <li style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 8px; display: flex; justify-content: space-between;">
+                <li class="modal-list-item">
                     <span>🍂 캐나다 포레스트 캐빈 팟</span>
                     <strong style="color: var(--primary-color);">81% 일치</strong>
                 </li>
@@ -180,7 +180,7 @@ const ACTION_RESPONSES = {
         title: 'AI 텍스트 핵심 요약',
         html: `
             <h4>해당 영어 단락 요약 결과</h4>
-            <p style="border-left: 3px solid var(--success-color); padding-left: 0.75rem; font-style: italic; color: #e2e8f0;">
+            <p class="modal-blockquote">
                 "구글 딥마인드의 최신 인터랙션 모델은 마우스 포인터가 맥락 인식 렌즈처럼 작동하여, 복잡한 프롬프트 입력 없이 호버만으로 다중 모드 컨텍스트를 이해하고 맞춤형 액션을 제시하여 사용자 경험을 크게 간소화한다."
             </p>
             <p style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-secondary);">압축률: 약 72% 감소 | 키워드: Context-aware Cursor, Multimodal VLM, Interaction</p>
@@ -210,14 +210,14 @@ const ACTION_RESPONSES = {
         html: `
             <h4>서울 관측소 기상 정밀 분석</h4>
             <p>기온은 <strong>26°C</strong>이나 습도가 <strong>72%</strong>로 높아 불쾌지수가 다소 높은 밤입니다.</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.75rem 0;">
-                <div style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px; text-align: center;">
-                    <span style="font-size:0.75rem; color:var(--text-secondary);">체감 온도</span>
-                    <h5 style="font-size:1.1rem; margin-top:0.25rem;">28.2°C</h5>
+            <div class="modal-grid-2">
+                <div class="modal-grid-box">
+                    <span>체감 온도</span>
+                    <h5>28.2°C</h5>
                 </div>
-                <div style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px; text-align: center;">
-                    <span style="font-size:0.75rem; color:var(--text-secondary);">열대야 가능성</span>
-                    <h5 style="font-size:1.1rem; margin-top:0.25rem; color: var(--warning-color);">중간 (40%)</h5>
+                <div class="modal-grid-box">
+                    <span>열대야 가능성</span>
+                    <h5 style="color: var(--warning-color);">중간 (40%)</h5>
                 </div>
             </div>
             <p style="font-size: 0.85rem;">자정이 지나면서 서풍의 영향으로 일시적으로 습도가 낮아질 전망입니다.</p>
@@ -228,11 +228,11 @@ const ACTION_RESPONSES = {
         html: `
             <h4>오늘의 스마트 코디네이션</h4>
             <p>높은 습도와 온도를 고려한 추천 코디입니다:</p>
-            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-                <span style="background: rgba(251, 188, 5, 0.1); border: 1px solid rgba(251, 188, 5, 0.2); padding: 0.5rem; border-radius: 8px; flex: 1; text-align: center; font-size: 0.85rem;">
+            <div class="modal-outfit-container">
+                <span class="modal-outfit-tag">
                     👕 상의<br>린넨 셔츠 / 반팔티
                 </span>
-                <span style="background: rgba(251, 188, 5, 0.1); border: 1px solid rgba(251, 188, 5, 0.2); padding: 0.5rem; border-radius: 8px; flex: 1; text-align: center; font-size: 0.85rem;">
+                <span class="modal-outfit-tag">
                     🩳 하의<br>시어서커 팬츠 / 반바지
                 </span>
             </div>
@@ -244,10 +244,19 @@ const ACTION_RESPONSES = {
         html: `
             <h4>실시간 활동 추천도: 65%</h4>
             <p>미세먼지 수준은 매우 쾌적하나 습한 날씨로 격렬한 실외 운동은 적합하지 않습니다.</p>
-            <ul style="list-style: none; margin-top: 0.5rem; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.35rem;">
-                <li>🚶‍♂️ 밤 산책 (가벼운 워킹) : <span style="color:var(--success-color);">최적 (90%)</span></li>
-                <li>🏃‍♂️ 실외 런닝 : <span style="color:var(--warning-color);">보통 (50%)</span></li>
-                <li>🚴 야외 사이클 : <span style="color:var(--warning-color);">보통 (55%)</span></li>
+            <ul class="modal-list">
+                <li class="modal-list-item">
+                    <span>🚶‍♂️ 밤 산책 (가벼운 워킹)</span>
+                    <span style="color:var(--success-color); font-weight: 600;">최적 (90%)</span>
+                </li>
+                <li class="modal-list-item">
+                    <span>🏃‍♂️ 실외 런닝</span>
+                    <span style="color:var(--warning-color); font-weight: 600;">보통 (50%)</span>
+                </li>
+                <li class="modal-list-item">
+                    <span>🚴 야외 사이클</span>
+                    <span style="color:var(--warning-color); font-weight: 600;">보통 (55%)</span>
+                </li>
             </ul>
         `
     },
@@ -256,22 +265,22 @@ const ACTION_RESPONSES = {
         html: `
             <h4>전체 유통사 실시간 크롤링</h4>
             <p><strong>Nova Chronograph V2</strong> 최저가 검색 정보:</p>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.85rem;">
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); text-align: left;">
-                    <th style="padding: 0.4rem 0;">쇼핑몰</th>
-                    <th style="padding: 0.4rem 0; text-align: right;">가격</th>
+            <table class="modal-table">
+                <tr>
+                    <th>쇼핑몰</th>
+                    <th style="text-align: right;">가격</th>
                 </tr>
                 <tr>
-                    <td style="padding: 0.4rem 0;">아마존 직구 (Prime)</td>
-                    <td style="padding: 0.4rem 0; text-align: right; font-weight: 600; color: var(--purple-color);">$289.00</td>
+                    <td>아마존 직구 (Prime)</td>
+                    <td style="text-align: right; font-weight: 600; color: var(--purple-color);">$289.00</td>
                 </tr>
                 <tr>
-                    <td style="padding: 0.4rem 0;">공식 파트너샵 (쿠폰 적용)</td>
-                    <td style="padding: 0.4rem 0; text-align: right; text-decoration: line-through;">$299.00</td>
+                    <td>공식 파트너샵 (쿠폰 적용)</td>
+                    <td style="text-align: right; text-decoration: line-through;">$299.00</td>
                 </tr>
                 <tr>
-                    <td style="padding: 0.4rem 0;">이베이 셀러샵 (미개봉 새제품)</td>
-                    <td style="padding: 0.4rem 0; text-align: right; font-weight: 600; color: var(--purple-color);">$274.50</td>
+                    <td>이베이 셀러샵 (미개봉 새제품)</td>
+                    <td style="text-align: right; font-weight: 600; color: var(--purple-color);">$274.50</td>
                 </tr>
             </table>
             <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem;">💡 이베이 쇼핑몰에서 관세 미포함가로 최저가 등록 상태입니다.</p>
@@ -283,11 +292,11 @@ const ACTION_RESPONSES = {
             <h4>구매 만족도: 4.7 / 5.0 (총 148건)</h4>
             <div style="margin: 0.75rem 0;">
                 <div style="margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.8rem; color: var(--success-color);">➕ 긍정 요인 (85% 비율)</span>
+                    <span style="font-size: 0.8rem; color: var(--success-color); font-weight: 600; display: block;">➕ 긍정 요인 (85% 비율)</span>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">"홀로그램 투사 시인성이 낮 밤 가리지 않고 뛰어남", "고급스러운 베젤 마감"</p>
                 </div>
                 <div>
-                    <span style="font-size: 0.8rem; color: var(--danger-color);">➖ 부정 요인 (15% 비율)</span>
+                    <span style="font-size: 0.8rem; color: var(--danger-color); font-weight: 600; display: block;">➖ 부정 요인 (15% 비율)</span>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">"생각보다 배터리가 이틀 반밖에 가지 않음", "다소 무거운 스틸 밴드 무게"</p>
                 </div>
             </div>
@@ -298,11 +307,11 @@ const ACTION_RESPONSES = {
         html: `
             <h4>향후 3개월 가치 추이 모델링</h4>
             <p>제품 시계열 가격 데이터 모델 가중치 반영 결과:</p>
-            <div style="background: rgba(0,0,0,0.2); padding: 0.75rem; border-radius: 8px; text-align: center; margin: 0.5rem 0; border: 1px dashed rgba(161, 66, 244, 0.3);">
-                <span style="font-size: 0.8rem; color: var(--text-secondary);">7월 여름 세일 예상 하락치</span>
+            <div class="modal-grid-box" style="padding: 0.75rem; border: 1px dashed rgba(161, 66, 244, 0.3);">
+                <span style="font-size: 0.8rem;">7월 여름 세일 예상 하락치</span>
                 <h4 style="color: var(--success-color); font-size: 1.3rem; margin-top: 0.25rem;">💰 -$30 (약 10% 가격 인하)</h4>
             </div>
-            <p style="font-size: 0.85rem;">급한 필요가 아니라면 3주 후에 시작될 여름 세일 기간까지 구매 대기를 강력히 추천합니다.</p>
+            <p style="font-size: 0.85rem; margin-top: 0.75rem;">급한 필요가 아니라면 3주 후에 시작될 여름 세일 기간까지 구매 대기를 강력히 추천합니다.</p>
         `
     },
     youtube_summary: {
@@ -310,14 +319,14 @@ const ACTION_RESPONSES = {
         html: `
             <h4>영상 14:25 분량 핵심 구간 요약</h4>
             <p><strong>주요 토픽별 분량 및 설명:</strong></p>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.85rem;">
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px;">
+            <ul class="modal-list">
+                <li class="modal-list-item-stacked">
                     <span style="color:var(--danger-color); font-weight:600;">00:00 - 03:15</span> 휴머노이드 로봇의 최신 기술 수준 (경량 하드웨어 및 동작 자유도 향상)
                 </li>
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px;">
+                <li class="modal-list-item-stacked">
                     <span style="color:var(--danger-color); font-weight:600;">03:15 - 08:40</span> 스마트 팩토리 조립 공정 투입 사례 (작업 속도 및 적응도 분석)
                 </li>
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px;">
+                <li class="modal-list-item-stacked">
                     <span style="color:var(--danger-color); font-weight:600;">08:40 - 14:25</span> 향후 10년 제조 단가 하락 전망 및 AI 제어 자율성 고도화 방향
                 </li>
             </ul>
@@ -328,12 +337,12 @@ const ACTION_RESPONSES = {
         html: `
             <h4>AI 시청 관심 데이터 기반 구간 추출</h4>
             <p>시청자가 가장 높은 밀도로 반복 학습하거나 스킵 없이 시청한 구간입니다.</p>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.85rem;">
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+            <ul class="modal-list">
+                <li class="modal-list-item">
                     <span>🔥 [05:22] 로봇 손가락의 정밀 구슬 조작 및 나사 체결 시험</span>
                     <span class="material-symbols-rounded" style="color:var(--danger-color); font-size:1.25rem;">play_arrow</span>
                 </li>
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                <li class="modal-list-item">
                     <span>🔥 [11:10] 돌발 장애물 출현 시 AI 판단 회피 제어 기술</span>
                     <span class="material-symbols-rounded" style="color:var(--danger-color); font-size:1.25rem;">play_arrow</span>
                 </li>
@@ -355,7 +364,7 @@ const ACTION_RESPONSES = {
         title: '신뢰성 검증 리포트',
         html: `
             <h4>AI 팩트체크 엔진 실시간 가공 결과</h4>
-            <div style="background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.2); padding: 0.75rem; border-radius: 12px; margin-bottom: 1rem;">
+            <div class="modal-factcheck-card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <span>신뢰도 등급 (Fact Check Rank)</span>
                     <strong style="color:var(--cyan-color); font-size:1.2rem;">96% (매우 신뢰)</strong>
@@ -371,9 +380,8 @@ const ACTION_RESPONSES = {
         html: `
             <h4>빅데이터 언사 톤앤매너 매핑 결과</h4>
             <p>작성된 기사 문장들의 중립성 지표입니다:</p>
-            <div style="position:relative; height:12px; background:rgba(255,255,255,0.05); border-radius:10px; margin: 1.5rem 0 1rem 0; overflow:visible;">
-                <!-- Left, Center, Right visual bar -->
-                <div style="position:absolute; left:49%; top:-4px; width:8px; height:20px; border-radius:4px; background:var(--cyan-color); box-shadow:0 0 12px var(--cyan-color);"></div>
+            <div class="modal-bias-track">
+                <div class="modal-bias-pin"></div>
             </div>
             <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-secondary);">
                 <span>친환경/진보적 치중</span>
@@ -387,16 +395,16 @@ const ACTION_RESPONSES = {
         title: '동일 보도 교차 분석',
         html: `
             <h4>주요 외신/국내 매체별 보도 관점 차이</h4>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.85rem;">
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+            <ul class="modal-list">
+                <li class="modal-list-item">
                     <span>📰 Reuters: "Renewables hit historic record milestone"</span>
                     <span style="color:var(--cyan-color); font-size:0.75rem; font-weight:600;">객관/긍정적</span>
                 </li>
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                <li class="modal-list-item">
                     <span>📰 Bloomberg: "Investment shifts as solar pod costs dive"</span>
                     <span style="color:var(--purple-color); font-size:0.75rem; font-weight:600;">시장투자관점</span>
                 </li>
-                <li style="background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 8px; display:flex; justify-content:space-between; align-items:center;">
+                <li class="modal-list-item">
                     <span>📰 Wall Street Journal: "Clean energy grids hit capacity bottlenecks"</span>
                     <span style="color:var(--danger-color); font-size:0.75rem; font-weight:600;">규제/보수적</span>
                 </li>
@@ -424,26 +432,26 @@ const ACTION_RESPONSES = {
         title: 'Alphabet Inc. 재무 성과',
         html: `
             <h4>최근 정식 공시 분기 실적 요약</h4>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.85rem;">
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; color:var(--text-secondary);">
-                    <th style="padding: 0.4rem 0;">지표 (Key Metrics)</th>
-                    <th style="padding: 0.4rem 0; text-align: right;">분기 실적</th>
-                    <th style="padding: 0.4rem 0; text-align: right;">YoY 대비</th>
+            <table class="modal-table">
+                <tr>
+                    <th>지표 (Key Metrics)</th>
+                    <th style="text-align: right;">분기 실적</th>
+                    <th style="text-align: right;">YoY 대비</th>
                 </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                    <td style="padding: 0.4rem 0; font-weight:500;">총 매출액 (Revenue)</td>
-                    <td style="padding: 0.4rem 0; text-align: right;">$80.54 Billion</td>
-                    <td style="padding: 0.4rem 0; text-align: right; color:var(--success-color); font-weight:600;">+15.4%</td>
+                <tr>
+                    <td style="font-weight:500;">총 매출액 (Revenue)</td>
+                    <td style="text-align: right;">$80.54 Billion</td>
+                    <td style="text-align: right; color:var(--success-color); font-weight:600;">+15.4%</td>
                 </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                    <td style="padding: 0.4rem 0; font-weight:500;">영업이익 (Operating Income)</td>
-                    <td style="padding: 0.4rem 0; text-align: right;">$25.77 Billion</td>
-                    <td style="padding: 0.4rem 0; text-align: right; color:var(--success-color); font-weight:600;">+24.2%</td>
+                <tr>
+                    <td style="font-weight:500;">영업이익 (Operating Income)</td>
+                    <td style="text-align: right;">$25.77 Billion</td>
+                    <td style="text-align: right; color:var(--success-color); font-weight:600;">+24.2%</td>
                 </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                    <td style="padding: 0.4rem 0; font-weight:500;">주당순이익 (EPS)</td>
-                    <td style="padding: 0.4rem 0; text-align: right;">$1.89</td>
-                    <td style="padding: 0.4rem 0; text-align: right; color:var(--success-color); font-weight:600;">+26.1%</td>
+                <tr>
+                    <td style="font-weight:500;">주당순이익 (EPS)</td>
+                    <td style="text-align: right;">$1.89</td>
+                    <td style="text-align: right; color:var(--success-color); font-weight:600;">+26.1%</td>
                 </tr>
             </table>
         `
@@ -452,30 +460,30 @@ const ACTION_RESPONSES = {
         title: '동일 업계 빅테크 비교',
         html: `
             <h4>주요 빅테크 기업 투자 분석 지표</h4>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.8rem;">
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; color:var(--text-secondary);">
-                    <th style="padding: 0.4rem 0;">TICKER</th>
-                    <th style="padding: 0.4rem 0; text-align: center;">P/E Ratio</th>
-                    <th style="padding: 0.4rem 0; text-align: center;">영업이익률</th>
-                    <th style="padding: 0.4rem 0; text-align: right;">시가총액</th>
+            <table class="modal-table">
+                <tr>
+                    <th>TICKER</th>
+                    <th style="text-align: center;">P/E Ratio</th>
+                    <th style="text-align: center;">영업이익률</th>
+                    <th style="text-align: right;">시가총액</th>
                 </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                    <td style="padding: 0.4rem 0; font-weight:600; color:var(--success-color);">GOOGL</td>
-                    <td style="padding: 0.4rem 0; text-align: center;">25.4x</td>
-                    <td style="padding: 0.4rem 0; text-align: center;">32.0%</td>
-                    <td style="padding: 0.4rem 0; text-align: right;">$2.25 Trillion</td>
+                <tr>
+                    <td style="font-weight:600; color:var(--success-color);">GOOGL</td>
+                    <td style="text-align: center;">25.4x</td>
+                    <td style="text-align: center;">32.0%</td>
+                    <td style="text-align: right;">$2.25 Trillion</td>
                 </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                    <td style="padding: 0.4rem 0; font-weight:600;">MSFT</td>
-                    <td style="padding: 0.4rem 0; text-align: center;">36.2x</td>
-                    <td style="padding: 0.4rem 0; text-align: center;">43.5%</td>
-                    <td style="padding: 0.4rem 0; text-align: right;">$3.18 Trillion</td>
+                <tr>
+                    <td style="font-weight:600;">MSFT</td>
+                    <td style="text-align: center;">36.2x</td>
+                    <td style="text-align: center;">43.5%</td>
+                    <td style="text-align: right;">$3.18 Trillion</td>
                 </tr>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                    <td style="padding: 0.4rem 0; font-weight:600;">AAPL</td>
-                    <td style="padding: 0.4rem 0; text-align: center;">30.8x</td>
-                    <td style="padding: 0.4rem 0; text-align: center;">30.1%</td>
-                    <td style="padding: 0.4rem 0; text-align: right;">$3.24 Trillion</td>
+                <tr>
+                    <td style="font-weight:600;">AAPL</td>
+                    <td style="text-align: center;">30.8x</td>
+                    <td style="text-align: center;">30.1%</td>
+                    <td style="text-align: right;">$3.24 Trillion</td>
                 </tr>
             </table>
             <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.75rem; line-height:1.4;">💡 경쟁사 대비 구글(GOOGL)은 상대적으로 낮은 P/E 밸류에이션 부담이 가장 낮은 축에 속합니다.</p>
@@ -728,6 +736,19 @@ function executeAIAction(action, themeColor) {
     // Configure Modal Colors
     document.documentElement.style.setProperty('--modal-theme-color', themeColor);
     
+    // Dynamic real-time weather & stock calculations
+    if (action === 'climate_report') {
+        ACTION_RESPONSES.climate_report.html = getClimateReportHTML();
+    } else if (action === 'outfit_guide') {
+        ACTION_RESPONSES.outfit_guide.html = getOutfitGuideHTML();
+    } else if (action === 'activity_score') {
+        ACTION_RESPONSES.activity_score.html = getActivityScoreHTML();
+    } else if (action === 'stock_forecast') {
+        ACTION_RESPONSES.stock_forecast.html = getStockForecastHTML();
+    } else if (action === 'stock_financials') {
+        ACTION_RESPONSES.stock_financials.html = getStockFinancialsHTML();
+    }
+    
     // Open Modal and display loading
     responseModal.classList.remove('hidden');
     setTimeout(() => {
@@ -783,3 +804,382 @@ closeModalBtn.addEventListener('mouseleave', () => {
     cursorHalo.classList.remove('magnetic');
     cursorDot.classList.remove('magnetic');
 });
+
+
+// --- Real-time API Integration (Weather & Stock) ---
+
+// Weather State
+let currentWeatherData = { temp: 26, humidity: 72, windSpeed: 3.2, weatherCode: 3, isNight: true };
+
+// Stock State
+let currentStockPrice = 178.45;
+const stockBasePrice = 171.92;
+const stockHistory = [];
+const maxHistoryPoints = 15;
+
+// Initialize stock history
+for (let i = 0; i < maxHistoryPoints; i++) {
+    const progress = i / (maxHistoryPoints - 1);
+    const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 1.5;
+    stockHistory.push(mockVal);
+}
+
+// Check if embedded inside iframe
+const isEmbedded = window.self !== window.top && window.parent;
+
+function getStockPrice() {
+    return (isEmbedded && typeof window.parent.getCurrentStockPrice === 'function') 
+        ? window.parent.getCurrentStockPrice() 
+        : currentStockPrice;
+}
+
+function getStockHistory() {
+    return (isEmbedded && typeof window.parent.getCurrentStockHistory === 'function') 
+        ? window.parent.getCurrentStockHistory() 
+        : stockHistory;
+}
+
+function getWeatherData() {
+    return (isEmbedded && typeof window.parent.getCurrentWeatherData === 'function') 
+        ? window.parent.getCurrentWeatherData() 
+        : currentWeatherData;
+}
+
+// Weather Icon Mapping
+function getWeatherIconAndDesc(code, isNight) {
+    let icon = 'light_mode';
+    let desc = '맑음';
+    if (isNight && (code === 0 || code === 1)) {
+        icon = 'dark_mode';
+    }
+    if (code === 0) {
+        desc = isNight ? '맑은 밤' : '맑음';
+    } else if (code === 1 || code === 2 || code === 3) {
+        icon = isNight ? 'nightlight' : 'cloudy';
+        desc = '구름 조금';
+        if (code === 3) desc = '흐림';
+    } else if (code === 45 || code === 48) {
+        icon = 'foggy';
+        desc = '안개';
+    } else if (code >= 51 && code <= 67) {
+        icon = 'rainy';
+        desc = '비';
+    } else if (code >= 71 && code <= 77) {
+        icon = 'ac_unit';
+        desc = '눈';
+    } else if (code >= 80 && code <= 82) {
+        icon = 'rainy';
+        desc = '소나기';
+    } else if (code >= 95) {
+        icon = 'thunderstorm';
+        desc = '뇌우';
+    }
+    return { icon, desc };
+}
+
+// Update Weather UI
+function updateWeatherUI(temp, humidity, windSpeed, weatherCode, isNight) {
+    const weatherCard = document.querySelector('.card-weather');
+    if (!weatherCard) return;
+    
+    const tempEl = weatherCard.querySelector('.weather-temp h2');
+    const iconEl = weatherCard.querySelector('.weather-icon');
+    const conditionEl = weatherCard.querySelector('.weather-condition');
+    const metricsEl = weatherCard.querySelectorAll('.weather-metrics .metric');
+    
+    if (tempEl) tempEl.innerHTML = `${Math.round(temp)}<span>°C</span>`;
+    
+    const { icon, desc } = getWeatherIconAndDesc(weatherCode, isNight);
+    if (iconEl) {
+        iconEl.textContent = icon;
+        if (icon === 'light_mode' || icon === 'dark_mode') {
+            iconEl.classList.add('animate-spin-slow');
+        } else {
+            iconEl.classList.remove('animate-spin-slow');
+        }
+    }
+    if (conditionEl) conditionEl.textContent = `${desc} (${isNight ? '밤' : '낮'})`;
+    
+    if (metricsEl.length >= 2) {
+        metricsEl[0].innerHTML = `<span class="material-symbols-rounded">water_drop</span> ${humidity}%`;
+        metricsEl[1].innerHTML = `<span class="material-symbols-rounded">air</span> ${windSpeed}m/s`;
+    }
+}
+
+// Fetch real-time weather
+async function fetchRealTimeWeather() {
+    try {
+        const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,is_day");
+        if (!res.ok) throw new Error("Weather API fetch failed");
+        const data = await res.json();
+        
+        if (data && data.current) {
+            const cur = data.current;
+            currentWeatherData.temp = cur.temperature_2m;
+            currentWeatherData.humidity = cur.relative_humidity_2m;
+            currentWeatherData.windSpeed = cur.wind_speed_10m;
+            currentWeatherData.weatherCode = cur.weather_code;
+            currentWeatherData.isNight = cur.is_day === 0;
+            
+            updateWeatherUI(currentWeatherData.temp, currentWeatherData.humidity, currentWeatherData.windSpeed, currentWeatherData.weatherCode, currentWeatherData.isNight);
+        }
+    } catch (err) {
+        console.warn("Could not fetch real-time weather, using mock:", err);
+        updateWeatherUI(currentWeatherData.temp, currentWeatherData.humidity, currentWeatherData.windSpeed, currentWeatherData.weatherCode, currentWeatherData.isNight);
+    }
+}
+
+// Update Stock Chart
+function updateStockChart() {
+    const stockCard = document.querySelector('.card-stock');
+    if (!stockCard) return;
+
+    const linePathEl = stockCard.querySelector('.chart-line');
+    const areaPathEl = stockCard.querySelector('.chart-area');
+    const pointEl = stockCard.querySelector('.chart-point');
+    const priceEl = stockCard.querySelector('.stock-price');
+    const changeEl = stockCard.querySelector('.stock-change');
+
+    const price = getStockPrice();
+    const hist = getStockHistory();
+    const isUp = price >= stockBasePrice;
+
+    if (priceEl) priceEl.textContent = `$${price.toFixed(2)}`;
+    
+    const changeVal = price - stockBasePrice;
+    const changePercent = (changeVal / stockBasePrice) * 100;
+    
+    if (changeEl) {
+        changeEl.className = `stock-change ${isUp ? 'up' : 'down'}`;
+        changeEl.innerHTML = `<span class="material-symbols-rounded">${isUp ? 'trending_up' : 'trending_down'}</span>${isUp ? '+' : ''}${changePercent.toFixed(2)}%`;
+        if (isUp) {
+            changeEl.style.color = 'var(--success-color)';
+            changeEl.style.backgroundColor = 'rgba(52, 168, 83, 0.1)';
+        } else {
+            changeEl.style.color = 'var(--danger-color)';
+            changeEl.style.backgroundColor = 'rgba(234, 67, 53, 0.1)';
+        }
+    }
+
+    if (hist.length === 0) return;
+
+    const minVal = Math.min(...hist);
+    const maxVal = Math.max(...hist);
+    const range = maxVal - minVal || 1;
+
+    const points = hist.map((val, idx) => {
+        const x = idx * (300 / (maxHistoryPoints - 1));
+        const y = 80 - ((val - minVal) / range) * 60;
+        return { x, y };
+    });
+
+    let lineD = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+    for (let i = 1; i < points.length; i++) {
+        lineD += ` L ${points[i].x.toFixed(1)} ${points[i].y.toFixed(1)}`;
+    }
+    
+    const areaD = `${lineD} L 300 100 L 0 100 Z`;
+
+    if (linePathEl) linePathEl.setAttribute('d', lineD);
+    if (areaPathEl) areaPathEl.setAttribute('d', areaD);
+    
+    const lastPoint = points[points.length - 1];
+    if (pointEl) {
+        pointEl.setAttribute('cx', lastPoint.x.toFixed(1));
+        pointEl.setAttribute('cy', lastPoint.y.toFixed(1));
+        pointEl.setAttribute('fill', isUp ? 'var(--success-color)' : 'var(--danger-color)');
+    }
+}
+
+function tickStock() {
+    const changePercent = (Math.random() - 0.49) * 0.0008;
+    currentStockPrice = currentStockPrice * (1 + changePercent);
+    
+    stockHistory.shift();
+    stockHistory.push(currentStockPrice);
+    
+    updateStockChart();
+}
+
+// Real-time weather/stock dynamic AI reports
+function getClimateReportHTML() {
+    const data = getWeatherData();
+    const sensible = data.temp + (data.humidity - 50) * 0.05 - data.windSpeed * 0.2;
+    return `
+        <h4>서울 관측소 기상 정밀 분석</h4>
+        <p>현재 실시간 기온은 <strong>${data.temp.toFixed(1)}°C</strong>이며 습도는 <strong>${data.humidity}%</strong>로 기상 분석 리포트 조건이 충족되었습니다.</p>
+        <div class="modal-grid-2">
+            <div class="modal-grid-box">
+                <span>체감 온도</span>
+                <h5>${sensible.toFixed(1)}°C</h5>
+            </div>
+            <div class="modal-grid-box">
+                <span>열대야 가능성</span>
+                <h5 style="color: var(--warning-color);">${data.temp >= 25 && data.isNight ? '높음 (60%)' : '낮음'}</h5>
+            </div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Open-Meteo 실시간 기상 관측 서버로부터 가져온 실제 기상 데이터를 바탕으로 가공된 보고서입니다.</p>
+    `;
+}
+
+function getOutfitGuideHTML() {
+    const data = getWeatherData();
+    const temp = data.temp;
+    let top = "린넨 셔츠 / 반팔티";
+    let bottom = "시어서커 팬츠 / 반바지";
+    let tip = "실내 냉방에 대비해 가벼운 가디건을 준비하세요.";
+    
+    if (temp >= 25) {
+        top = "린넨 셔츠 / 얇은 반팔티";
+        bottom = "반바지 / 얇은 슬랙스";
+        tip = "습도가 높아 땀 배출이 용이한 통풍성 소재가 좋습니다.";
+    } else if (temp >= 18) {
+        top = "긴팔 티셔츠 / 얇은 셔츠";
+        bottom = "청바지 / 면바지";
+        tip = "아침 저녁 일교차에 대비해 가벼운 아우터 활용을 추천합니다.";
+    } else if (temp >= 12) {
+        top = "맨투맨 / 자켓 / 가디건";
+        bottom = "슬랙스 / 청바지";
+        tip = "자켓이나 트렌치코트 등 적절한 아우터 레이어링이 적합합니다.";
+    } else {
+        top = "니트 / 코트 / 가죽자켓";
+        bottom = "두꺼운 바지 / 기모팬츠";
+        tip = "기온이 낮으니 보온 기능성 이너와 외투를 따뜻하게 착용하세요.";
+    }
+    
+    return `
+        <h4>오늘의 스마트 코디네이션</h4>
+        <p>실시간 온도 <strong>${temp.toFixed(1)}°C</strong>에 맞춰 실시간으로 추천된 의상 피드입니다:</p>
+        <div class="modal-outfit-container">
+            <span class="modal-outfit-tag">
+                👕 상의<br>${top}
+            </span>
+            <span class="modal-outfit-tag">
+                🩳 하의<br>${bottom}
+            </span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem;">💡 ${tip}</p>
+    `;
+}
+
+function getActivityScoreHTML() {
+    const data = getWeatherData();
+    let score = 85;
+    let desc = "미세먼지 수준이 매우 쾌적하며 야외 활동을 하기에 최적의 기온과 바람입니다.";
+    let walkRating = "최적 (95%)";
+    let runRating = "최적 (90%)";
+    let cycleRating = "최적 (90%)";
+    
+    if (data.humidity > 80 || data.weatherCode >= 51) {
+        score = 30;
+        desc = "실시간 강수 또는 가습 상태로 야외 활동이 원활하지 않습니다. 실내 스포츠를 추천합니다.";
+        walkRating = "불가 (15%)";
+        runRating = "비추천 (5%)";
+        cycleRating = "비추천 (5%)";
+    } else if (data.temp >= 30) {
+        score = 45;
+        desc = "기온이 너무 높아 한낮 야외 활동은 삼가시기 바라며, 수분을 충분히 섭취하세요.";
+        walkRating = "보통 (55%)";
+        runRating = "주의 (25%)";
+        cycleRating = "주의 (30%)";
+    } else if (data.temp < 10) {
+        score = 65;
+        desc = "기온이 다소 쌀쌀하므로 관절과 근육을 충분히 예열(스트레칭)한 후 활동하세요.";
+        walkRating = "보통 (75%)";
+        runRating = "보통 (60%)";
+        cycleRating = "보통 (60%)";
+    }
+    
+    return `
+        <h4>실시간 활동 추천도: ${score}%</h4>
+        <p>${desc}</p>
+        <ul class="modal-list">
+            <li class="modal-list-item">
+                <span>🚶‍♂️ 가벼운 워킹 / 밤산책</span>
+                <span style="color:var(--success-color); font-weight: 600;">${walkRating}</span>
+            </li>
+            <li class="modal-list-item">
+                <span>🏃‍♂️ 실외 러닝</span>
+                <span style="color:var(--warning-color); font-weight: 600;">${runRating}</span>
+            </li>
+            <li class="modal-list-item">
+                <span>🚴 야외 사이클</span>
+                <span style="color:var(--warning-color); font-weight: 600;">${cycleRating}</span>
+            </li>
+        </ul>
+    `;
+}
+
+function getStockForecastHTML() {
+    const price = getStockPrice();
+    const targetPrice = price * 1.076;
+    return `
+        <h4>GOOGL 30일 시세 전망</h4>
+        <p>실시간 가격 데이터 기반의 30일 시세 전망 예측 결과입니다:</p>
+        <div class="route-map-mock" style="height:120px; background:radial-gradient(circle at center, #112211 0%, #051105 100%); border-color:var(--success-color);">
+            <span class="route-label start-lbl" style="color:var(--success-color); top: 50%;">현재가 ($${price.toFixed(2)})</span>
+            <span class="route-label end-lbl" style="color:var(--success-color); top: 20%;">예측가 ($${targetPrice.toFixed(2)})</span>
+            <svg width="100%" height="100%" style="position:absolute; inset:0; overflow:visible;">
+                <path d="M 45 80 Q 110 75, 170 55 T 255 35" fill="none" stroke="var(--success-color)" stroke-width="2.5" stroke-dasharray="4" stroke-dashoffset="0"/>
+                <circle cx="45" cy="80" r="4" fill="var(--success-color)"/>
+                <circle cx="255" cy="35" r="4.5" fill="var(--success-color)" class="pulsing"/>
+            </svg>
+        </div>
+        <p style="margin-top:0.75rem; font-size:0.8rem; text-align:center; color:var(--text-secondary);">실시간 가격 데이터 및 시계열(LSTM) 모델을 활용한 분석치입니다.</p>
+    `;
+}
+
+function getStockFinancialsHTML() {
+    const price = getStockPrice();
+    const revenue = price * 0.451;
+    return `
+        <h4>Alphabet Inc. 실시간 재무 분석</h4>
+        <p>현재 시장가 $${price.toFixed(2)} 기준으로 연산한 재무 주요 지표 요약입니다:</p>
+        <table class="modal-table">
+            <tr>
+                <th>지표 (Key Metrics)</th>
+                <th style="text-align: right;">분기 실적</th>
+                <th style="text-align: right;">YoY 대비</th>
+            </tr>
+            <tr>
+                <td style="font-weight:500;">총 매출액 (Revenue)</td>
+                <td style="text-align: right;">$${revenue.toFixed(2)} Billion</td>
+                <td style="text-align: right; color:var(--success-color); font-weight:600;">+15.4%</td>
+            </tr>
+            <tr>
+                <td style="font-weight:500;">영업이익 (Operating Income)</td>
+                <td style="text-align: right;">$${(revenue * 0.32).toFixed(2)} Billion</td>
+                <td style="text-align: right; color:var(--success-color); font-weight:600;">+24.2%</td>
+            </tr>
+            <tr>
+                <td style="font-weight:500;">주당순이익 (EPS)</td>
+                <td style="text-align: right;">$${(price * 0.0106).toFixed(2)}</td>
+                <td style="text-align: right; color:var(--success-color); font-weight:600;">+26.1%</td>
+            </tr>
+        </table>
+    `;
+}
+
+// Initialization
+if (isEmbedded) {
+    // Sync loop for embedded iframes
+    setInterval(() => {
+        const parentWeather = getWeatherData();
+        if (parentWeather) {
+            currentWeatherData = { ...parentWeather };
+            updateWeatherUI(currentWeatherData.temp, currentWeatherData.humidity, currentWeatherData.windSpeed, currentWeatherData.weatherCode, currentWeatherData.isNight);
+        }
+        const parentPrice = getStockPrice();
+        const parentHist = getStockHistory();
+        if (parentPrice && parentHist) {
+            currentStockPrice = parentPrice;
+            stockHistory.length = 0;
+            stockHistory.push(...parentHist);
+            updateStockChart();
+        }
+    }, 500);
+} else {
+    // Independent loop for main page
+    fetchRealTimeWeather();
+    setInterval(tickStock, 1000);
+}
