@@ -230,6 +230,11 @@
         if (window.self !== window.top) {
             document.body.classList.add('embedded-mode');
             
+            // 부모 창의 테마(light-theme) 상태를 감지하여 동기화
+            if (window.parent && window.parent.document.body.classList.contains('light-theme')) {
+                document.body.classList.add('light-theme');
+            }
+            
             // iframe 내 마우스 움직임을 부모 창(OS)의 커서 좌표계로 프레임 브릿지 전달
             window.addEventListener('mousemove', (e) => {
                 if (window.frameElement) {

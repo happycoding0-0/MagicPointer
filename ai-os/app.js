@@ -1109,6 +1109,17 @@ if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('light-theme');
         const icon = themeToggle.querySelector('.theme-icon');
+        
+        // iframe 내부 문서도 같이 라이트 테마 토글 동기화
+        const iframe = document.getElementById('dashboard-iframe');
+        if (iframe && iframe.contentDocument && iframe.contentDocument.body) {
+            if (document.body.classList.contains('light-theme')) {
+                iframe.contentDocument.body.classList.add('light-theme');
+            } else {
+                iframe.contentDocument.body.classList.remove('light-theme');
+            }
+        }
+
         if (document.body.classList.contains('light-theme')) {
             icon.textContent = 'light_mode';
         } else {

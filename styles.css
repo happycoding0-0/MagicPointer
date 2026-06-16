@@ -20,6 +20,72 @@
     --cursor-transition-time: 0.3s;
 }
 
+body.light-theme {
+    --bg-color: #f1f5f9;
+    --card-bg: rgba(255, 255, 255, 0.65);
+    --card-border: rgba(15, 23, 42, 0.08);
+    --card-hover-border: rgba(66, 133, 244, 0.5);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+}
+
+body.light-theme .logo h1 {
+    background: linear-gradient(to right, #0f172a, #475569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light-theme .status-indicator {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .app-instructions {
+    border-top-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .step-num {
+    color: rgba(0, 0, 0, 0.12);
+}
+
+body.light-theme .modal-card {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.1);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15), 0 0 50px rgba(66, 133, 244, 0.05);
+}
+
+body.light-theme .modal-header {
+    border-bottom-color: rgba(15, 23, 42, 0.06);
+}
+
+body.light-theme #close-modal-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .modal-backdrop {
+    background: rgba(241, 245, 249, 0.65);
+}
+
+body.light-theme .code-output {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+}
+
+body.light-theme .route-map-mock {
+    border-color: rgba(15, 23, 42, 0.06);
+}
+
+body.light-theme .launch-os-btn {
+    background: linear-gradient(135deg, rgba(66, 133, 244, 0.08), rgba(161, 66, 244, 0.08));
+    border-color: rgba(66, 133, 244, 0.25);
+}
+
+body.light-theme .launch-os-btn:hover {
+    background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(161, 66, 244, 0.15));
+    border-color: rgba(66, 133, 244, 0.4);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -1201,7 +1267,7 @@ html, body {
     position: absolute;
     font-size: 0.7rem;
     font-weight: 500;
-    color: var(--text-secondary);
+    color: #94a3b8;
 }
 
 .route-label.start-lbl { top: 20%; left: 13%; }

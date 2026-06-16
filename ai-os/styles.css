@@ -141,6 +141,34 @@ body.light-theme #magic-cursor-halo.morph-drag .cursor-icon {
     color: #000000;
 }
 
+body.light-theme .modal-card {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.1);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15), 0 0 50px rgba(66, 133, 244, 0.05);
+}
+
+body.light-theme .modal-header {
+    border-bottom-color: rgba(15, 23, 42, 0.06);
+}
+
+body.light-theme #close-modal-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .modal-backdrop {
+    background: rgba(241, 245, 249, 0.65);
+}
+
+body.light-theme .code-output {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+}
+
+body.light-theme .route-map-mock {
+    border-color: rgba(15, 23, 42, 0.06);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -1355,7 +1383,7 @@ body.light-theme .context-tag {
 .route-dot.end { right: 15%; background-color: var(--primary-color); box-shadow: 0 0 10px var(--primary-color); }
 .route-pulse { position: absolute; width: 8px; height: 8px; border-radius: 50%; background-color: var(--text-primary); top: 50%; left: 15%; transform: translate(-50%, -50%); animation: travel-pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
 @keyframes travel-pulse { 0% { left: 15%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 85%; opacity: 0; } }
-.route-label { position: absolute; font-size: 0.7rem; font-weight: 500; color: var(--text-secondary); }
+.route-label { position: absolute; font-size: 0.7rem; font-weight: 500; color: #94a3b8; }
 .route-label.start-lbl { top: 20%; left: 13%; }
 .route-label.end-lbl { top: 20%; right: 13%; }
 
