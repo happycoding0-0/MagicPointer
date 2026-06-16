@@ -578,7 +578,6 @@ html, body {
 .icon-youtube { color: var(--danger-color); }
 .icon-stock { color: var(--success-color); }
 .icon-news { color: var(--cyan-color); }
-.icon-dashboard { color: var(--primary-color); }
 
 .desktop-shortcut:hover .shortcut-icon {
     background: rgba(255, 255, 255, 0.08);
@@ -1123,7 +1122,6 @@ body.light-theme .context-tag {
 .dock-item[data-app="media"]:hover { color: var(--danger-color); }
 .dock-item[data-app="market"]:hover { color: var(--success-color); }
 .dock-item[data-app="editorial"]:hover { color: var(--cyan-color); }
-.dock-item[data-app="dashboard"]:hover { color: var(--primary-color); }
 
 .dock-divider {
     width: 1px;
@@ -1158,7 +1156,6 @@ body.light-theme .context-tag {
 .dock-item[data-app="media"] .dock-indicator { background-color: var(--danger-color); box-shadow: 0 0 6px var(--danger-color); }
 .dock-item[data-app="market"] .dock-indicator { background-color: var(--success-color); box-shadow: 0 0 6px var(--success-color); }
 .dock-item[data-app="editorial"] .dock-indicator { background-color: var(--cyan-color); box-shadow: 0 0 6px var(--cyan-color); }
-.dock-item[data-app="dashboard"] .dock-indicator { background-color: var(--primary-color); box-shadow: 0 0 6px var(--primary-color); }
 
 .dock-item.running .dock-indicator {
     transform: translateX(-50%) scale(1);

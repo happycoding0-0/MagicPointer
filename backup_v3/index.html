@@ -30,12 +30,9 @@
                 <h1>Magic Pointer</h1>
             </div>
             <p class="subtitle">Google DeepMind AI Interaction Paradigm Simulation</p>
-            <div class="header-actions">
-                <a href="ai-os/index.html" class="launch-os-btn"><span class="material-symbols-rounded">desktop_windows</span>MagicOS 데스크톱 실행</a>
-                <div class="status-indicator">
-                    <span class="status-dot pulsing"></span>
-                    <span class="status-text">AI Cursor Engine: Active</span>
-                </div>
+            <div class="status-indicator">
+                <span class="status-dot pulsing"></span>
+                <span class="status-text">AI Cursor Engine: Active</span>
             </div>
         </header>
 
@@ -225,31 +222,5 @@
     </div>
 
     <script src="app.js"></script>
-    <script>
-        // 임베디드 모드 (OS 서브윈도우 내부 iframe) 대응
-        if (window.self !== window.top) {
-            document.body.classList.add('embedded-mode');
-            
-            // iframe 내 마우스 움직임을 부모 창(OS)의 커서 좌표계로 프레임 브릿지 전달
-            window.addEventListener('mousemove', (e) => {
-                if (window.frameElement) {
-                    const rect = window.frameElement.getBoundingClientRect();
-                    const parentX = e.clientX + rect.left;
-                    const parentY = e.clientY + rect.top;
-                    
-                    if (window.parent && typeof window.parent.updateMouseCoordinates === 'function') {
-                        window.parent.updateMouseCoordinates(parentX, parentY);
-                    }
-                }
-            });
-
-            // iframe 내부 클릭 시 부모 창의 열려있는 팝업이나 메뉴를 닫도록 이벤트 위임
-            window.addEventListener('mousedown', () => {
-                if (window.parent && typeof window.parent.closeAllPopups === 'function') {
-                    window.parent.closeAllPopups();
-                }
-            });
-        }
-    </script>
 </body>
 </html>

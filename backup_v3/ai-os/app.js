@@ -50,18 +50,6 @@ let resizedWindow = null;
 let resizeStartSize = { w: 0, h: 0 };
 let resizeStartMouse = { x: 0, y: 0 };
 
-// iframe 내 마우스 움직임을 부모(OS) 마우스 좌표계와 동기화하기 위한 전역 API
-window.updateMouseCoordinates = function(x, y) {
-    mouse.x = x;
-    mouse.y = y;
-};
-
-// iframe 클릭 시 부모 OS의 팝업/메뉴들을 닫을 수 있게 지원하는 API
-window.closeAllPopups = function() {
-    if (popupMenu) popupMenu.classList.add('hidden');
-    isPopupOpen = false;
-};
-
 // Initialize Cursor (center of screen)
 mouse.x = window.innerWidth / 2;
 mouse.y = window.innerHeight / 2;

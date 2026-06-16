@@ -310,42 +310,6 @@ html, body {
     color: var(--text-secondary);
 }
 
-.header-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.launch-os-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(161, 66, 244, 0.15));
-    border: 1px solid rgba(66, 133, 244, 0.35);
-    color: var(--text-primary);
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    font-size: 0.8rem;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.3s, border-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    cursor: none;
-}
-
-.launch-os-btn:hover {
-    background: linear-gradient(135deg, rgba(66, 133, 244, 0.3), rgba(161, 66, 244, 0.3));
-    border-color: rgba(66, 133, 244, 0.5);
-    box-shadow: 0 0 15px rgba(66, 133, 244, 0.2);
-    transform: translateY(-1px);
-}
-
-.launch-os-btn .material-symbols-rounded {
-    font-size: 1.1rem;
-    color: var(--primary-color);
-}
-
 .status-dot {
     width: 6px;
     height: 6px;
@@ -1210,36 +1174,4 @@ html, body {
 /* Utility classes */
 .hidden {
     display: none !important;
-}
-
-/* Embedded Mode Overrides (when displayed inside OS iframe) */
-body.embedded-mode {
-    cursor: default !important;
-}
-
-body.embedded-mode #magic-cursor-dot,
-body.embedded-mode #magic-cursor-halo {
-    display: none !important;
-}
-
-body.embedded-mode .app-wrapper {
-    padding: 1.5rem 1.5rem 0 1.5rem !important;
-    min-height: auto !important;
-}
-
-body.embedded-mode .app-header,
-body.embedded-mode .app-instructions {
-    display: none !important;
-}
-
-body.embedded-mode .simulation-grid {
-    margin-top: 0 !important;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-    gap: 1.25rem !important;
-    padding-bottom: 2rem !important;
-}
-
-/* Specific component tweaks in embedded mode */
-body.embedded-mode .sim-card {
-    margin-bottom: 0 !important;
 }
