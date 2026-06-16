@@ -1178,16 +1178,16 @@ window.addEventListener('load', () => {
 let currentWeatherData = { temp: 26, humidity: 72, windSpeed: 3.2, weatherCode: 3, isNight: true };
 
 // Stock State
-let currentStockPrice = 238200;
-let stockBasePrice = 228800;
+let currentStockPrice = 2382000;
+let stockBasePrice = 2288000;
 const stockHistory = [];
 const maxHistoryPoints = 15;
 
 // Initialize stock history
 for (let i = 0; i < maxHistoryPoints; i++) {
     const progress = i / (maxHistoryPoints - 1);
-    const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 4000;
-    stockHistory.push(Math.round(mockVal / 500) * 500);
+    const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 40000;
+    stockHistory.push(Math.round(mockVal / 1000) * 1000);
 }
 
 // News State
@@ -1200,6 +1200,7 @@ let currentNewsArticle = {
 // Expose variables globally for same-origin iframe sync
 window.getCurrentStockPrice = () => currentStockPrice;
 window.getCurrentStockHistory = () => stockHistory;
+window.getCurrentStockBasePrice = () => stockBasePrice;
 window.getCurrentWeatherData = () => currentWeatherData;
 
 // Weather Icon Mapping
@@ -1349,9 +1350,9 @@ function updateStockChart() {
 }
 
 function tickStock() {
-    const change = (Math.random() - 0.5) * 1500;
-    currentStockPrice = Math.max(150000, Math.min(300000, currentStockPrice + change));
-    currentStockPrice = Math.round(currentStockPrice / 500) * 500;
+    const change = (Math.random() - 0.5) * 15000;
+    currentStockPrice = Math.max(1500000, Math.min(3000000, currentStockPrice + change));
+    currentStockPrice = Math.round(currentStockPrice / 1000) * 1000;
     
     stockHistory.shift();
     stockHistory.push(currentStockPrice);
@@ -1561,40 +1562,39 @@ function getStockCompetitorsHTML() {
 
 function getFindRouteHTML() {
     return `
-        <h4>화랑대 철도공원 경로 안내</h4>
-        <p><strong>화랑대역 (지하철 6호선) 4번 출구</strong>에서 출발하는 최적 보행 경로입니다:</p>
+        <h4>동대문디자인플라자(DDP) 지하철 연결 경로</h4>
+        <p><strong>동대문역사문화공원역 (2, 4, 5호선) 1번 출구</strong>에서 어울림광장 및 디자인거리로 직접 연결되는 도보 가이드입니다:</p>
         <div class="route-map-mock" style="height:100px; position:relative; background:rgba(0,0,0,0.2); border:1px solid var(--modal-item-border); border-radius:8px;">
-            <span class="route-label start-lbl" style="left:15px; top:40%; color:var(--primary-color);">화랑대역</span>
-            <span class="route-label end-lbl" style="right:15px; top:40%; color:var(--success-color);">철도공원</span>
+            <span class="route-label start-lbl" style="left:15px; top:40%; color:var(--primary-color);">역사 대합실 (B2)</span>
+            <span class="route-label end-lbl" style="right:15px; top:40%; color:var(--success-color);">DDP 어울림광장</span>
             <svg width="100%" height="100%" style="position:absolute; inset:0; overflow:visible;">
-                <path d="M 75 50 Q 150 45, 225 50" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4"/>
-                <circle cx="75" cy="50" r="4.5" fill="var(--primary-color)"/>
-                <circle cx="225" cy="50" r="4.5" fill="var(--success-color)" class="pulsing"/>
+                <path d="M 90 50 Q 150 45, 210 50" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4"/>
+                <circle cx="90" cy="50" r="4.5" fill="var(--primary-color)"/>
+                <circle cx="210" cy="50" r="4.5" fill="var(--success-color)" class="pulsing"/>
             </svg>
         </div>
-        <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-secondary);">
-            🚶‍♂️ 도보 이동 시: 4번 출구 직진 후 육사삼거리 방향으로 약 10분 소요 (보행 도로 평탄)<br>
-            🚲 따릉이 대여 시: 역사 앞 대여소 이용 시 3분 내 공원 자전거 보관소 도착 가능
+        <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
+            🚶‍♂️ **이동 방법**: 지하철 개찰구 통과 후 **1번 출구** 방향 무빙워크 탑승 → 지하 어울림광장(Oullim Square)과 배움터 지하 2층 입구가 지하철 출구와 계단 없이 바로 연결되어 유모차 및 휠체어로도 매우 안전하고 편리하게 접근할 수 있습니다.
         </p>
     `;
 }
 
 function getVisualSearchHTML() {
     return `
-        <h4>철도/간이역 테마 명소 검색</h4>
-        <p>철도 철길과 빈티지 기차를 배경으로 한 국내 유사 관광 명소 매칭률:</p>
+        <h4>비정형 미래 건축물 시각 유사도 검색</h4>
+        <p>자하 하디드 설계 특유의 유기적이고 부드러운 곡선 금속 패널 레이아웃 분석 결과:</p>
         <ul class="modal-list">
             <li class="modal-list-item">
-                <span>🚂 양평 구둔역 폐역 (영화 촬영지)</span>
-                <strong style="color: var(--primary-color);">92% 일치</strong>
+                <span>🛸 베이징 갤럭시 소호 (Galaxy SOHO - 자하 하디드)</span>
+                <strong style="color: var(--primary-color);">94% 일치</strong>
             </li>
             <li class="modal-list-item">
-                <span>🚆 의왕 철도박물관 (실물 차량 전시)</span>
-                <strong style="color: var(--primary-color);">85% 일치</strong>
+                <span>🏢 싱가포르 마리나 베이 샌즈 (Moshe Safdie)</span>
+                <strong style="color: var(--primary-color);">87% 일치</strong>
             </li>
             <li class="modal-list-item">
-                <span>🌸 군산 경암동 철길마을</span>
-                <strong style="color: var(--primary-color);">78% 일치</strong>
+                <span>🌿 싱가포르 주얼 창이 공항 (내부 돔 곡선 구조)</span>
+                <strong style="color: var(--primary-color);">81% 일치</strong>
             </li>
         </ul>
     `;
@@ -1602,12 +1602,12 @@ function getVisualSearchHTML() {
 
 function getTranslateSignHTML() {
     return `
-        <h4>공원 안내문 번역 및 정보</h4>
+        <h4>DDP 이용객 수칙 실시간 번역</h4>
         <div class="code-output" style="font-size:0.8rem; line-height:1.5;">
-원문 (한국어):<br>
-【화랑대 철도공원 밤빛정원은 일몰 후 자동 점등되며, 안전을 위해 자전거 및 킥보드 탑승을 제한합니다.】<br><br>
-Translated (English):<br>
-【The Night Light Garden of Hwarangdae Railroad Park lights up automatically after sunset. Riding bicycles and kickboards is restricted for safety.】
+<strong>원문 (한국어):</strong><br>
+【동대문디자인플라자(DDP) 전시관 및 시설은 구역별로 운영 시간이 다르며, 안전한 관람 환경 조성을 위해 야외 잔디 언덕 경사로에서의 개인 이동장치(킥보드, 자전거 등) 주행 및 흡연을 금지합니다.】<br><br>
+<strong>영문 번역 (English):</strong><br>
+【Operating hours for Dongdaemun Design Plaza (DDP) exhibition halls and facilities vary by zone. To ensure a safe viewing environment, smoking and riding personal mobility devices (such as electric kickboards and bicycles) on the outdoor grass slope areas are strictly prohibited.】
         </div>
     `;
 }
@@ -1686,8 +1686,8 @@ async function fetchSKHynixPrice() {
             stockHistory.length = 0;
             for (let i = 0; i < maxHistoryPoints; i++) {
                 const progress = i / (maxHistoryPoints - 1);
-                const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 4000;
-                stockHistory.push(Math.round(mockVal / 500) * 500);
+                const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 40000;
+                stockHistory.push(Math.round(mockVal / 1000) * 1000);
             }
             updateStockChart();
             console.log("Successfully fetched actual SK Hynix price in OS:", currentStockPrice);
