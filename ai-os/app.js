@@ -1008,7 +1008,7 @@ function executeAIAction(action, themeColor) {
 
     document.documentElement.style.setProperty('--modal-theme-color', themeColor);
     
-    // Dynamic real-time weather & stock calculations
+    // Dynamic real-time weather, stock, travel & news calculations
     if (action === 'climate_report') {
         ACTION_RESPONSES.climate_report.html = getClimateReportHTML();
     } else if (action === 'outfit_guide') {
@@ -1019,6 +1019,20 @@ function executeAIAction(action, themeColor) {
         ACTION_RESPONSES.stock_forecast.html = getStockForecastHTML();
     } else if (action === 'stock_financials') {
         ACTION_RESPONSES.stock_financials.html = getStockFinancialsHTML();
+    } else if (action === 'stock_competitors') {
+        ACTION_RESPONSES.stock_competitors.html = getStockCompetitorsHTML();
+    } else if (action === 'find_route') {
+        ACTION_RESPONSES.find_route.html = getFindRouteHTML();
+    } else if (action === 'visual_search') {
+        ACTION_RESPONSES.visual_search.html = getVisualSearchHTML();
+    } else if (action === 'translate_sign') {
+        ACTION_RESPONSES.translate_sign.html = getTranslateSignHTML();
+    } else if (action === 'news_verification') {
+        ACTION_RESPONSES.news_verification.html = getNewsVerificationHTML();
+    } else if (action === 'news_bias') {
+        ACTION_RESPONSES.news_bias.html = getNewsBiasHTML();
+    } else if (action === 'news_coverage') {
+        ACTION_RESPONSES.news_coverage.html = getNewsCoverageHTML();
     }
     
     responseModal.classList.remove('hidden');
@@ -1164,17 +1178,24 @@ window.addEventListener('load', () => {
 let currentWeatherData = { temp: 26, humidity: 72, windSpeed: 3.2, weatherCode: 3, isNight: true };
 
 // Stock State
-let currentStockPrice = 178.45;
-const stockBasePrice = 171.92;
+let currentStockPrice = 238200;
+let stockBasePrice = 228800;
 const stockHistory = [];
 const maxHistoryPoints = 15;
 
 // Initialize stock history
 for (let i = 0; i < maxHistoryPoints; i++) {
     const progress = i / (maxHistoryPoints - 1);
-    const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 1.5;
-    stockHistory.push(mockVal);
+    const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 4000;
+    stockHistory.push(Math.round(mockVal / 500) * 500);
 }
+
+// News State
+let currentNewsArticle = {
+    title: "Global Green Energy Transition Reaches Critical Milestone",
+    description: "Renewable energy installations have officially surpassed fossil fuel deployment in major grids for the first quarter, signaling a faster pivot than previously projected by models.",
+    source: "Scientific Horizon Daily"
+};
 
 // Expose variables globally for same-origin iframe sync
 window.getCurrentStockPrice = () => currentStockPrice;
@@ -1245,7 +1266,7 @@ function updateWeatherUI(temp, humidity, windSpeed, weatherCode, isNight) {
 // Fetch real-time weather
 async function fetchRealTimeWeather() {
     try {
-        const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,is_day");
+        const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=37.6208&longitude=127.0561&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,is_day");
         if (!res.ok) throw new Error("Weather API fetch failed");
         const data = await res.json();
         
@@ -1280,14 +1301,14 @@ function updateStockChart() {
     const hist = stockHistory;
     const isUp = price >= stockBasePrice;
 
-    if (priceEl) priceEl.textContent = `$${price.toFixed(2)}`;
+    if (priceEl) priceEl.textContent = `₩${Math.round(price).toLocaleString()}`;
     
     const changeVal = price - stockBasePrice;
     const changePercent = (changeVal / stockBasePrice) * 100;
     
     if (changeEl) {
         changeEl.className = `stock-change ${isUp ? 'up' : 'down'}`;
-        changeEl.innerHTML = `<span class="material-symbols-rounded">${isUp ? 'trending_up' : 'trending_down'}</span>${isUp ? '+' : ''}${changePercent.toFixed(2)}%`;
+        changeEl.innerHTML = `<span class="material-symbols-rounded">${isUp ? 'trending_up' : 'trending_down'}</span>${isUp ? '+' : ''}${Math.round(changeVal).toLocaleString()}원 (${isUp ? '+' : ''}${changePercent.toFixed(2)}%)`;
         if (isUp) {
             changeEl.style.color = 'var(--success-color)';
             changeEl.style.backgroundColor = 'rgba(52, 168, 83, 0.1)';
@@ -1328,8 +1349,9 @@ function updateStockChart() {
 }
 
 function tickStock() {
-    const changePercent = (Math.random() - 0.49) * 0.0008;
-    currentStockPrice = currentStockPrice * (1 + changePercent);
+    const change = (Math.random() - 0.5) * 1500;
+    currentStockPrice = Math.max(150000, Math.min(300000, currentStockPrice + change));
+    currentStockPrice = Math.round(currentStockPrice / 500) * 500;
     
     stockHistory.shift();
     stockHistory.push(currentStockPrice);
@@ -1342,7 +1364,7 @@ function getClimateReportHTML() {
     const data = currentWeatherData;
     const sensible = data.temp + (data.humidity - 50) * 0.05 - data.windSpeed * 0.2;
     return `
-        <h4>서울 관측소 기상 정밀 분석</h4>
+        <h4>서울 노원구 월계동 (광운인공지능고 관측)</h4>
         <p>현재 실시간 기온은 <strong>${data.temp.toFixed(1)}°C</strong>이며 습도는 <strong>${data.humidity}%</strong>로 기상 분석 리포트 조건이 충족되었습니다.</p>
         <div class="modal-grid-2">
             <div class="modal-grid-box">
@@ -1448,13 +1470,13 @@ function getActivityScoreHTML() {
 
 function getStockForecastHTML() {
     const price = currentStockPrice;
-    const targetPrice = price * 1.076;
+    const targetPrice = Math.round((price * 1.085) / 500) * 500;
     return `
-        <h4>GOOGL 30일 시세 전망</h4>
+        <h4>SK하이닉스 30일 시세 전망</h4>
         <p>실시간 가격 데이터 기반의 30일 시세 전망 예측 결과입니다:</p>
         <div class="route-map-mock" style="height:120px; background:radial-gradient(circle at center, #112211 0%, #051105 100%); border-color:var(--success-color);">
-            <span class="route-label start-lbl" style="color:var(--success-color); top: 50%;">현재가 ($${price.toFixed(2)})</span>
-            <span class="route-label end-lbl" style="color:var(--success-color); top: 20%;">예측가 ($${targetPrice.toFixed(2)})</span>
+            <span class="route-label start-lbl" style="color:var(--success-color); top: 50%;">현재가 (₩${Math.round(price).toLocaleString()})</span>
+            <span class="route-label end-lbl" style="color:var(--success-color); top: 20%;">예측가 (₩${targetPrice.toLocaleString()})</span>
             <svg width="100%" height="100%" style="position:absolute; inset:0; overflow:visible;">
                 <path d="M 45 80 Q 110 75, 170 55 T 255 35" fill="none" stroke="var(--success-color)" stroke-width="2.5" stroke-dasharray="4" stroke-dashoffset="0"/>
                 <circle cx="45" cy="80" r="4" fill="var(--success-color)"/>
@@ -1467,10 +1489,9 @@ function getStockForecastHTML() {
 
 function getStockFinancialsHTML() {
     const price = currentStockPrice;
-    const revenue = price * 0.451;
     return `
-        <h4>Alphabet Inc. 실시간 재무 분석</h4>
-        <p>현재 시장가 $${price.toFixed(2)} 기준으로 연산한 재무 주요 지표 요약입니다:</p>
+        <h4>SK하이닉스 실시간 재무 분석</h4>
+        <p>현재 시장가 ₩${Math.round(price).toLocaleString()} 기준으로 연산한 재무 주요 지표 요약입니다:</p>
         <table class="modal-table">
             <tr>
                 <th>지표 (Key Metrics)</th>
@@ -1479,23 +1500,278 @@ function getStockFinancialsHTML() {
             </tr>
             <tr>
                 <td style="font-weight:500;">총 매출액 (Revenue)</td>
-                <td style="text-align: right;">$${revenue.toFixed(2)} Billion</td>
-                <td style="text-align: right; color:var(--success-color); font-weight:600;">+15.4%</td>
+                <td style="text-align: right;">12.42조 원</td>
+                <td style="text-align: right; color:var(--success-color); font-weight:600;">+144.3%</td>
             </tr>
             <tr>
                 <td style="font-weight:500;">영업이익 (Operating Income)</td>
-                <td style="text-align: right;">$${(revenue * 0.32).toFixed(2)} Billion</td>
-                <td style="text-align: right; color:var(--success-color); font-weight:600;">+24.2%</td>
+                <td style="text-align: right;">2.88조 원</td>
+                <td style="text-align: right; color:var(--success-color); font-weight:600;">흑자전환</td>
             </tr>
             <tr>
                 <td style="font-weight:500;">주당순이익 (EPS)</td>
-                <td style="text-align: right;">$${(price * 0.0106).toFixed(2)}</td>
-                <td style="text-align: right; color:var(--success-color); font-weight:600;">+26.1%</td>
+                <td style="text-align: right;">₩3,850</td>
+                <td style="text-align: right; color:var(--success-color); font-weight:600;">흑자전환</td>
             </tr>
         </table>
     `;
 }
 
+function getStockCompetitorsHTML() {
+    return `
+        <h4>메모리 반도체 업계 지표 비교</h4>
+        <p>SK하이닉스 및 주요 글로벌 반도체 경쟁사의 투자 분석 지표입니다:</p>
+        <table class="modal-table">
+            <tr>
+                <th>TICKER</th>
+                <th style="text-align: center;">P/E Ratio</th>
+                <th style="text-align: center;">영업이익률</th>
+                <th style="text-align: right;">시가총액</th>
+            </tr>
+            <tr>
+                <td style="font-weight:600; color:var(--success-color);">SK하이닉스 (000660)</td>
+                <td style="text-align: center;">18.5x</td>
+                <td style="text-align: center;">23.2%</td>
+                <td style="text-align: right;">163.4조 원</td>
+            </tr>
+            <tr>
+                <td style="font-weight:600;">삼성전자 (005930)</td>
+                <td style="text-align: center;">22.1x</td>
+                <td style="text-align: center;">11.5%</td>
+                <td style="text-align: right;">462.1조 원</td>
+            </tr>
+            <tr>
+                <td style="font-weight:600;">Micron (MU)</td>
+                <td style="text-align: center;">24.8x</td>
+                <td style="text-align: center;">-4.2%</td>
+                <td style="text-align: right;">$142 Billion</td>
+            </tr>
+            <tr>
+                <td style="font-weight:600;">TSMC (TSM)</td>
+                <td style="text-align: center;">26.3x</td>
+                <td style="text-align: center;">42.5%</td>
+                <td style="text-align: right;">$840 Billion</td>
+            </tr>
+        </table>
+        <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.75rem; line-height:1.4;">
+            💡 고대역폭 메모리(HBM) 시장의 리더십을 바탕으로 SK하이닉스의 영업이익률이 업계 평균 대비 강력한 성장세를 보이고 있습니다.
+        </p>
+    `;
+}
+
+function getFindRouteHTML() {
+    return `
+        <h4>화랑대 철도공원 경로 안내</h4>
+        <p><strong>화랑대역 (지하철 6호선) 4번 출구</strong>에서 출발하는 최적 보행 경로입니다:</p>
+        <div class="route-map-mock" style="height:100px; position:relative; background:rgba(0,0,0,0.2); border:1px solid var(--modal-item-border); border-radius:8px;">
+            <span class="route-label start-lbl" style="left:15px; top:40%; color:var(--primary-color);">화랑대역</span>
+            <span class="route-label end-lbl" style="right:15px; top:40%; color:var(--success-color);">철도공원</span>
+            <svg width="100%" height="100%" style="position:absolute; inset:0; overflow:visible;">
+                <path d="M 75 50 Q 150 45, 225 50" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4"/>
+                <circle cx="75" cy="50" r="4.5" fill="var(--primary-color)"/>
+                <circle cx="225" cy="50" r="4.5" fill="var(--success-color)" class="pulsing"/>
+            </svg>
+        </div>
+        <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-secondary);">
+            🚶‍♂️ 도보 이동 시: 4번 출구 직진 후 육사삼거리 방향으로 약 10분 소요 (보행 도로 평탄)<br>
+            🚲 따릉이 대여 시: 역사 앞 대여소 이용 시 3분 내 공원 자전거 보관소 도착 가능
+        </p>
+    `;
+}
+
+function getVisualSearchHTML() {
+    return `
+        <h4>철도/간이역 테마 명소 검색</h4>
+        <p>철도 철길과 빈티지 기차를 배경으로 한 국내 유사 관광 명소 매칭률:</p>
+        <ul class="modal-list">
+            <li class="modal-list-item">
+                <span>🚂 양평 구둔역 폐역 (영화 촬영지)</span>
+                <strong style="color: var(--primary-color);">92% 일치</strong>
+            </li>
+            <li class="modal-list-item">
+                <span>🚆 의왕 철도박물관 (실물 차량 전시)</span>
+                <strong style="color: var(--primary-color);">85% 일치</strong>
+            </li>
+            <li class="modal-list-item">
+                <span>🌸 군산 경암동 철길마을</span>
+                <strong style="color: var(--primary-color);">78% 일치</strong>
+            </li>
+        </ul>
+    `;
+}
+
+function getTranslateSignHTML() {
+    return `
+        <h4>공원 안내문 번역 및 정보</h4>
+        <div class="code-output" style="font-size:0.8rem; line-height:1.5;">
+원문 (한국어):<br>
+【화랑대 철도공원 밤빛정원은 일몰 후 자동 점등되며, 안전을 위해 자전거 및 킥보드 탑승을 제한합니다.】<br><br>
+Translated (English):<br>
+【The Night Light Garden of Hwarangdae Railroad Park lights up automatically after sunset. Riding bicycles and kickboards is restricted for safety.】
+        </div>
+    `;
+}
+
+function getNewsVerificationHTML() {
+    const title = currentNewsArticle.title || "Latest Tech Story";
+    const source = currentNewsArticle.source || "BBC Technology";
+    return `
+        <h4>AI 팩트체크: "${title}"</h4>
+        <div class="modal-factcheck-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span>신뢰도 등급 (Confidence Rank)</span>
+                <strong style="color:var(--cyan-color); font-size:1.2rem;">95% (높음)</strong>
+            </div>
+        </div>
+        <p style="font-size:0.85rem; line-height:1.5; color:var(--text-secondary);">
+            <strong>분석 결과:</strong> 본 보도는 ${source}의 공식 취재 기사이며, 교차 검증된 소식통과 보도 자료를 근거로 작성되어 팩트 왜곡 가능성이 매우 희박합니다.
+        </p>
+    `;
+}
+
+function getNewsBiasHTML() {
+    const title = currentNewsArticle.title || "Latest Tech Story";
+    return `
+        <h4>정치적/경제적 편향도 분석</h4>
+        <p>"${title}" 보도의 톤앤매너 매핑 결과:</p>
+        <div class="modal-bias-track">
+            <div class="modal-bias-pin"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-secondary);">
+            <span>주관적/감정적 서사</span>
+            <span style="color:var(--cyan-color); font-weight:600;">중립 (Neutral)</span>
+            <span>산업성장/홍보성 치중</span>
+        </div>
+        <p style="font-size:0.85rem; margin-top:1rem; color:var(--text-secondary);">
+            해당 기사는 자극적 형용사를 지양하고 팩트 위주로 건조하게 서술되어 중립성 지수가 매우 높습니다.
+        </p>
+    `;
+}
+
+function getNewsCoverageHTML() {
+    const title = currentNewsArticle.title || "Latest Tech Story";
+    return `
+        <h4>동일 보도 교차 분석 (Related Coverage)</h4>
+        <p>"${title}" 관련 주요 외신 보도 스탠스:</p>
+        <ul class="modal-list">
+            <li class="modal-list-item">
+                <span>📰 Reuters: "${title.substring(0, 30)}..."</span>
+                <span style="color:var(--cyan-color); font-size:0.75rem; font-weight:600;">객관적 보도</span>
+            </li>
+            <li class="modal-list-item">
+                <span>📰 Bloomberg: tech analysis and market implications</span>
+                <span style="color:var(--purple-color); font-size:0.75rem; font-weight:600;">시장 영향력 관점</span>
+            </li>
+            <li class="modal-list-item">
+                <span>📰 TechCrunch: detailed product breakdown</span>
+                <span style="color:var(--success-color); font-size:0.75rem; font-weight:600;">기술적 분석</span>
+            </li>
+        </ul>
+    `;
+}
+
+async function fetchSKHynixPrice() {
+    try {
+        const targetUrl = "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?interval=1d&range=1d";
+        const res = await fetch("https://corsproxy.io/?url=" + encodeURIComponent(targetUrl));
+        const data = await res.json();
+        const meta = data?.chart?.result?.[0]?.meta;
+        if (meta && meta.regularMarketPrice) {
+            currentStockPrice = meta.regularMarketPrice;
+            if (meta.chartPreviousClose) {
+                stockBasePrice = meta.chartPreviousClose;
+            } else {
+                stockBasePrice = currentStockPrice * 0.96;
+            }
+            stockHistory.length = 0;
+            for (let i = 0; i < maxHistoryPoints; i++) {
+                const progress = i / (maxHistoryPoints - 1);
+                const mockVal = stockBasePrice + (currentStockPrice - stockBasePrice) * progress + (Math.random() - 0.5) * 4000;
+                stockHistory.push(Math.round(mockVal / 500) * 500);
+            }
+            updateStockChart();
+            console.log("Successfully fetched actual SK Hynix price in OS:", currentStockPrice);
+        }
+    } catch (err) {
+        console.warn("Could not fetch SK Hynix price in OS, using fallback:", err);
+    }
+}
+
+async function fetchRealTimeNews() {
+    try {
+        const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=http://feeds.bbci.co.uk/news/technology/rss.xml");
+        const data = await res.json();
+        if (data && data.items && data.items.length > 0) {
+            const article = data.items[0];
+            currentNewsArticle.title = article.title;
+            currentNewsArticle.description = article.description || article.content || "";
+            currentNewsArticle.source = "BBC Technology";
+            
+            currentNewsArticle.description = currentNewsArticle.description.replace(/<[^>]*>/g, '').trim();
+            if (currentNewsArticle.description.length > 180) {
+                currentNewsArticle.description = currentNewsArticle.description.substring(0, 177) + "...";
+            }
+            
+            const newsCard = document.querySelector('#win-editorial .card-news');
+            if (newsCard) {
+                newsCard.setAttribute('data-ai-title', currentNewsArticle.title);
+                newsCard.setAttribute('data-ai-desc', currentNewsArticle.description.substring(0, 100) + "...");
+                
+                const titleEl = newsCard.querySelector('.card-content h3');
+                const descEl = newsCard.querySelector('.card-content .description');
+                const sourceEl = newsCard.querySelector('.card-content .news-source');
+                const imgEl = newsCard.querySelector('.card-media-news img');
+                
+                if (titleEl) titleEl.textContent = currentNewsArticle.title;
+                if (descEl) descEl.textContent = currentNewsArticle.description;
+                if (sourceEl) sourceEl.textContent = currentNewsArticle.source;
+                
+                if (imgEl && article.thumbnail) {
+                    imgEl.src = article.thumbnail;
+                }
+            }
+        }
+    } catch (err) {
+        console.warn("Could not fetch real-time news in OS, using mock:", err);
+    }
+}
+
+function initVideoPlayer() {
+    const youtubeCards = document.querySelectorAll('.card-youtube');
+    youtubeCards.forEach(card => {
+        const playBtn = card.querySelector('.video-play-overlay');
+        if (playBtn) {
+            playBtn.style.cursor = 'none';
+            playBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const mediaContainer = card.querySelector('.card-media-youtube');
+                if (mediaContainer) {
+                    mediaContainer.innerHTML = `
+                        <iframe src="https://www.youtube.com/embed/DpEsHp8903g?autoplay=1" 
+                                style="width: 100%; height: 100%; border: none;" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    `;
+                }
+                if (activeCard === card) {
+                    card.classList.remove('recognized');
+                    cursorHalo.classList.remove('morph-youtube');
+                    cursorIcon.innerHTML = 'select_all';
+                    isScanned = false;
+                    cursorState = 'idle';
+                    activeCard = null;
+                }
+            });
+        }
+    });
+}
+
 // Initialization
+initVideoPlayer();
+window.getCurrentNewsArticle = () => currentNewsArticle;
+
 fetchRealTimeWeather();
+fetchSKHynixPrice();
+fetchRealTimeNews();
 setInterval(tickStock, 1000);
