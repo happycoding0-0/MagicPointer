@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Pointer - AI-Powered Future Mouse Pointer</title>
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Custom AI Cursor Elements -->
+    <div id="magic-cursor-dot"></div>
+    <div id="magic-cursor-halo">
+        <!-- SVG for circular progress indication during scanning -->
+        <svg class="progress-ring" width="48" height="48">
+            <circle class="progress-ring__circle" stroke="var(--primary-color)" stroke-width="2" fill="transparent" r="22" cx="24" cy="24"/>
+        </svg>
+        <span class="cursor-icon material-symbols-rounded">select_all</span>
+    </div>
+
+    <!-- App Container -->
+    <div class="app-wrapper">
+        <header class="app-header">
+            <div class="logo">
+                <span class="material-symbols-rounded logo-icon">blur_on</span>
+                <h1>Magic Pointer</h1>
+            </div>
+            <p class="subtitle">Google DeepMind AI Interaction Paradigm Simulation</p>
+            <div class="status-indicator">
+                <span class="status-dot pulsing"></span>
+                <span class="status-text">AI Cursor Engine: Active</span>
+            </div>
+        </header>
+
+        <main class="simulation-grid">
+            <!-- 1. Travel Image Element -->
+            <section class="sim-card card-image" data-ai-type="image" data-ai-title="Kyoto Eco-Resort" data-ai-desc="Futuristic glass architecture nestled in Kyoto's bamboo valley.">
+                <div class="card-media">
+                    <img src="assets/travel.png" alt="Kyoto Eco-Resort" loading="lazy">
+                    <div class="media-overlay"></div>
+                    <span class="context-tag"><span class="material-symbols-rounded">image</span>Image Context</span>
+                </div>
+                <div class="card-content">
+                    <h3>Kyoto Glass Eco-Resort</h3>
+                    <p class="location"><span class="material-symbols-rounded">location_on</span>Kyoto, Japan</p>
+                    <p class="description">A sustainable oasis featuring state-of-the-art climate-controlled glass dome pods integrated seamlessly into the historic bamboo forests of Arashiyama.</p>
+                </div>
+                <div class="scan-overlay"></div>
+            </section>
+
+            <!-- 2. Complex English Text Element -->
+            <section class="sim-card card-text" data-ai-type="text" data-ai-title="AI Interaction Principle" data-ai-desc="Text segment regarding deep visual-linguistic grounding.">
+                <div class="card-header">
+                    <span class="context-tag"><span class="material-symbols-rounded">article</span>Text Context</span>
+                </div>
+                <div class="card-content">
+                    <h3>DeepMind Interaction Model</h3>
+                    <div class="text-body-wrapper">
+                        <p class="text-body">
+                            "Google DeepMind's new interaction paradigm proposes that mouse pointers should act as context-aware lenses. Instead of manually copying text or uploading images, the pointer itself senses the semantic boundary under it, interprets the content (multimodal visual-linguistic context), and projects intent-driven action widgets. By leveraging real-time vision-language models, the cursor dynamically morphs to indicate high-probability micro-actions, thereby bypassing traditional prompt engineering bar."
+                        </p>
+                    </div>
+                </div>
+                <div class="scan-overlay"></div>
+            </section>
+
+            <!-- 3. Weather Widget Element -->
+            <section class="sim-card card-weather" data-ai-type="weather" data-ai-title="Seoul Weather Forecast" data-ai-desc="Dynamic meteorological metrics tracking high humidity and fine dust.">
+                <span class="context-tag"><span class="material-symbols-rounded">thermostat</span>Data Context</span>
+                <div class="weather-display">
+                    <div class="weather-temp">
+                        <h2>26<span>°C</span></h2>
+                        <span class="weather-icon material-symbols-rounded animate-spin-slow">dark_mode</span>
+                    </div>
+                    <div class="weather-details">
+                        <p class="weather-condition">Partly Cloudy (Night)</p>
+                        <div class="weather-metrics">
+                            <span class="metric"><span class="material-symbols-rounded">water_drop</span> 72%</span>
+                            <span class="metric"><span class="material-symbols-rounded">air</span> 3.2m/s</span>
+                            <span class="metric"><span class="material-symbols-rounded">grain</span> PM2.5: Good</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="scan-overlay"></div>
+            </section>
+
+            <!-- 4. Futuristic Product Element -->
+            <section class="sim-card card-product" data-ai-type="product" data-ai-title="Nova Chronograph Watch" data-ai-desc="Holographic wearable luxury gadget catalog.">
+                <div class="card-media-product">
+                    <img src="assets/product.png" alt="Nova Chronograph" loading="lazy">
+                    <div class="media-overlay"></div>
+                    <span class="context-tag"><span class="material-symbols-rounded">shopping_bag</span>Product Context</span>
+                </div>
+                <div class="card-content">
+                    <div class="product-header">
+                        <h3>Nova Chronograph V2</h3>
+                        <span class="price">$299.00</span>
+                    </div>
+                    <p class="description">A wearable luxury statement piece displaying real-time holographic schedules, atmospheric telemetry, and biometric sync using custom glass projection technology.</p>
+                </div>
+                <div class="scan-overlay"></div>
+            </section>
+        </main>
+
+        <!-- Guide Panel -->
+        <footer class="app-instructions">
+            <div class="instruction-step">
+                <span class="step-num">01</span>
+                <p>Move your mouse cursor over any card elements.</p>
+            </div>
+            <div class="instruction-step">
+                <span class="step-num">02</span>
+                <p>Hover for <strong>600ms</strong> to trigger the AI visual scanning animation.</p>
+            </div>
+            <div class="instruction-step">
+                <span class="step-num">03</span>
+                <p>Once scanned, the cursor morphs. <strong>Click</strong> to open the context-aware action menu.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Dynamic AI Popup Menu (Follows the mouse on click) -->
+    <div id="ai-popup-menu" class="hidden">
+        <div class="popup-header">
+            <span class="material-symbols-rounded header-icon">psychology</span>
+            <span class="popup-title">AI Quick Actions</span>
+        </div>
+        <div id="popup-actions-list">
+            <!-- Buttons dynamically generated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- AI Response Modal (Slides in beautifully to show mock execution results) -->
+    <div id="ai-response-modal" class="hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="material-symbols-rounded modal-icon">auto_awesome</span>
+                    <h3 id="modal-title">AI Processing</h3>
+                </div>
+                <button id="close-modal-btn" class="material-symbols-rounded">close</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-loader" class="hidden">
+                    <div class="loader-spinner"></div>
+                    <p>Analyzing context details and generating solution...</p>
+                </div>
+                <div id="modal-result" class="hidden">
+                    <!-- Results dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
