@@ -111,6 +111,7 @@ const AI_ACTIONS = {
         { label: '자막 실시간 번역 (Translate Transcript)', icon: 'translate', action: 'youtube_translation', color: '#ea4335' }
     ],
     news: [
+        { label: '한글 번역 및 요약 (Translate & Summarize)', icon: 'g_translate', action: 'news_translation', color: '#00e5ff' },
         { label: '신뢰성 검증 (Fact Check)', icon: 'fact_check', action: 'news_verification', color: '#00e5ff' },
         { label: '정치적 편향도 체크 (Bias Meter)', icon: 'balance', action: 'news_bias', color: '#00e5ff' },
         { label: '교차 보도 관련 뉴스 (Related Coverage)', icon: 'chrome_reader_mode', action: 'news_coverage', color: '#00e5ff' }
@@ -264,40 +265,40 @@ const ACTION_RESPONSES = {
         title: 'AI 스마트 가격 비교',
         html: `
             <h4>전체 유통사 실시간 크롤링</h4>
-            <p><strong>Nova Chronograph V2</strong> 최저가 검색 정보:</p>
+            <p><strong>Apple Vision Pro (256GB)</strong> 최저가 검색 정보:</p>
             <table class="modal-table">
                 <tr>
                     <th>쇼핑몰</th>
                     <th style="text-align: right;">가격</th>
                 </tr>
                 <tr>
-                    <td>아마존 직구 (Prime)</td>
-                    <td style="text-align: right; font-weight: 600; color: var(--purple-color);">$289.00</td>
+                    <td>Apple 공식 홈페이지</td>
+                    <td style="text-align: right; font-weight: 600; color: var(--purple-color);">$3,499.00</td>
                 </tr>
                 <tr>
-                    <td>공식 파트너샵 (쿠폰 적용)</td>
-                    <td style="text-align: right; text-decoration: line-through;">$299.00</td>
+                    <td>B&H Photo Video (할인 적용)</td>
+                    <td style="text-align: right; font-weight: 600; color: var(--purple-color);">$3,449.00</td>
                 </tr>
                 <tr>
-                    <td>이베이 셀러샵 (미개봉 새제품)</td>
-                    <td style="text-align: right; font-weight: 600; color: var(--purple-color);">$274.50</td>
+                    <td>Best Buy (Open Box - 우수 등급)</td>
+                    <td style="text-align: right; font-weight: 600; color: var(--success-color);">$3,099.00</td>
                 </tr>
             </table>
-            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem;">💡 이베이 쇼핑몰에서 관세 미포함가로 최저가 등록 상태입니다.</p>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem;">💡 공식 출고가는 $3,499이며, 베스트바이 오픈박스(리퍼브 등급)에서 최저가로 등록되어 있습니다.</p>
         `
     },
     review_summary: {
         title: 'AI 글로벌 리뷰 감성 분석',
         html: `
-            <h4>구매 만족도: 4.7 / 5.0 (총 148건)</h4>
+            <h4>구매 만족도: 4.5 / 5.0 (총 2,450건)</h4>
             <div style="margin: 0.75rem 0;">
                 <div style="margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.8rem; color: var(--success-color); font-weight: 600; display: block;">➕ 긍정 요인 (85% 비율)</span>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">"홀로그램 투사 시인성이 낮 밤 가리지 않고 뛰어남", "고급스러운 베젤 마감"</p>
+                    <span style="font-size: 0.8rem; color: var(--success-color); font-weight: 600; display: block;">➕ 긍정 요인 (82% 비율)</span>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">"마치 눈앞에 실제 화면이 떠 있는 듯한 micro-OLED 4K 화질", "독보적인 눈 추적 및 시선 기반 제어 편리성"</p>
                 </div>
                 <div>
-                    <span style="font-size: 0.8rem; color: var(--danger-color); font-weight: 600; display: block;">➖ 부정 요인 (15% 비율)</span>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary);">"생각보다 배터리가 이틀 반밖에 가지 않음", "다소 무거운 스틸 밴드 무게"</p>
+                    <span style="font-size: 0.8rem; color: var(--danger-color); font-weight: 600; display: block;">➖ 부정 요인 (18% 비율)</span>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">"장시간 사용 시 본체 앞부분 무게(약 600g)로 인한 뺨과 목의 압박", "외부 배터리팩 무선 연결 불가능 및 고가의 판매 단가"</p>
                 </div>
             </div>
         `
@@ -308,26 +309,26 @@ const ACTION_RESPONSES = {
             <h4>향후 3개월 가치 추이 모델링</h4>
             <p>제품 시계열 가격 데이터 모델 가중치 반영 결과:</p>
             <div class="modal-grid-box" style="padding: 0.75rem; border: 1px dashed rgba(161, 66, 244, 0.3);">
-                <span style="font-size: 0.8rem;">7월 여름 세일 예상 하락치</span>
-                <h4 style="color: var(--success-color); font-size: 1.3rem; margin-top: 0.25rem;">💰 -$30 (약 10% 가격 인하)</h4>
+                <span style="font-size: 0.8rem;">차세대 모델 소문 및 리퍼비시 물량 증가 예상치</span>
+                <h4 style="color: var(--success-color); font-size: 1.3rem; margin-top: 0.25rem;">💰 약 -$500 (오픈박스/리퍼브 기준 $2,900 대 진입)</h4>
             </div>
-            <p style="font-size: 0.85rem; margin-top: 0.75rem;">급한 필요가 아니라면 3주 후에 시작될 여름 세일 기간까지 구매 대기를 강력히 추천합니다.</p>
+            <p style="font-size: 0.85rem; margin-top: 0.75rem;">새 제품 공식 출고가는 동결이 유력하지만, 중고나 리퍼 시장에서는 공급 과잉으로 인한 상당 폭의 시세 하락이 예측되므로 구매 시 참고 바랍니다.</p>
         `
     },
     youtube_summary: {
         title: '유튜브 타임라인 요약',
         html: `
-            <h4>영상 14:25 분량 핵심 구간 요약</h4>
+            <h4>영상 02:35 분량 핵심 구간 요약</h4>
             <p><strong>주요 토픽별 분량 및 설명:</strong></p>
             <ul class="modal-list">
                 <li class="modal-list-item-stacked">
-                    <span style="color:var(--danger-color); font-weight:600;">00:00 - 03:15</span> 휴머노이드 로봇의 최신 기술 수준 (경량 하드웨어 및 동작 자유도 향상)
+                    <span style="color:var(--danger-color); font-weight:600;">00:00 - 00:40</span> 사과 전달 (OpenAI의 음성 종단간 추론 모델을 사용하여 앞에 있는 물건 중 먹을 수 있는 유일한 물체인 사과를 인식해 사용자에게 제공)
                 </li>
                 <li class="modal-list-item-stacked">
-                    <span style="color:var(--danger-color); font-weight:600;">03:15 - 08:40</span> 스마트 팩토리 조립 공정 투입 사례 (작업 속도 및 적응도 분석)
+                    <span style="color:var(--danger-color); font-weight:600;">00:40 - 01:20</span> 쓰레기 정리 (바구니 안에 캔 및 쓰레기 수거 작업 수행)
                 </li>
                 <li class="modal-list-item-stacked">
-                    <span style="color:var(--danger-color); font-weight:600;">08:40 - 14:25</span> 향후 10년 제조 단가 하락 전망 및 AI 제어 자율성 고도화 방향
+                    <span style="color:var(--danger-color); font-weight:600;">01:20 - 02:35</span> 식기 정리 및 행동 분석 음성 설명 (식기 건조대에 컵과 그릇을 미세 위치 제어로 정리 후 자신의 인지/행동 프로세스를 자연스럽게 음성으로 설명)
                 </li>
             </ul>
         `
@@ -339,11 +340,15 @@ const ACTION_RESPONSES = {
             <p>시청자가 가장 높은 밀도로 반복 학습하거나 스킵 없이 시청한 구간입니다.</p>
             <ul class="modal-list">
                 <li class="modal-list-item">
-                    <span>🔥 [05:22] 로봇 손가락의 정밀 구슬 조작 및 나사 체결 시험</span>
+                    <span>🔥 [00:25] 사용자가 먹을 것을 요구하자 사과를 정확하게 집어 전달하는 순간</span>
                     <span class="material-symbols-rounded" style="color:var(--danger-color); font-size:1.25rem;">play_arrow</span>
                 </li>
                 <li class="modal-list-item">
-                    <span>🔥 [11:10] 돌발 장애물 출현 시 AI 판단 회피 제어 기술</span>
+                    <span>🔥 [01:45] 컵을 식기 건조대에 뒤집어서 정밀하게 꽂아 놓는 고난도 제어</span>
+                    <span class="material-symbols-rounded" style="color:var(--danger-color); font-size:1.25rem;">play_arrow</span>
+                </li>
+                <li class="modal-list-item">
+                    <span>🔥 [02:10] OpenAI 음성 추론 모델을 통해 자신이 수행한 일들의 인과관계를 설명하는 구간</span>
                     <span class="material-symbols-rounded" style="color:var(--danger-color); font-size:1.25rem;">play_arrow</span>
                 </li>
             </ul>
@@ -353,11 +358,20 @@ const ACTION_RESPONSES = {
         title: '비디오 자막 번역',
         html: `
             <h4>AI 실시간 다국어 번역 스크립트</h4>
-            <div class="code-output" style="max-height: 140px; overflow-y: auto; font-size:0.8rem; line-height:1.5;">[03:40] "These humanoid units aren't just programmed loops. They run real-time neural networks."
--> "이 휴머노이드 유닛들은 단순히 고정적으로 프로그래밍된 반복 루프로 작동하는 것이 아닙니다. 실시간 신경망 추론을 수행합니다."
+            <div class="code-output" style="max-height: 160px; overflow-y: auto; font-size:0.8rem; line-height:1.5;">[00:08] User: "Figure One, what do you see right now?"
+-> 사용자: "피규어 1, 지금 앞에 무엇이 보이나요?"
+Figure One: "I see a red apple on a plate in the center of the table..."
+-> 피규어 1: "테이블 중앙 접시 위에 놓인 빨간 사과가 보입니다..."
 
-[04:15] "The manufacturing cost of hardware has plummeted by 40% in two years."
--> "하드웨어의 제조 원가는 최근 2년 동안 40% 이상 급락했습니다."</div>
+[00:22] User: "Great. Can I have something to eat?"
+-> 사용자: "좋아요. 먹을 것 좀 줄래요?"
+Figure One: "Sure." (picks up the apple and hands it over)
+-> 피규어 1: "물론이죠." (사과를 집어 전달함)
+
+[01:15] User: "Can you explain why you just did what you did, while you empty this trash?"
+-> 사용자: "쓰레기를 비우면서 방금 그 행동을 왜 했는지 설명해 줄 수 있나요?"
+Figure One: "So, I gave you the apple because it's the only edible item I could provide you with from the table."
+-> 피규어 1: "테이블에서 제공할 수 있는 유일한 먹을거리가 사과였기 때문에 사과를 드린 것입니다."</div>
         `
     },
     news_verification: {
@@ -411,14 +425,18 @@ const ACTION_RESPONSES = {
             </ul>
         `
     },
+    news_translation: {
+        title: '실시간 뉴스 번역 및 요약',
+        html: ''
+    },
     stock_forecast: {
-        title: 'GOOGL 30일 시세 전망',
+        title: 'SK하이닉스 30일 시세 전망',
         html: `
             <h4>시계열 딥러닝(LSTM) 가격 예측 모델링</h4>
             <p>개별 실적 가중치를 반영한 30일 가격 예측 추이입니다:</p>
             <div class="route-map-mock" style="height:120px; background:radial-gradient(circle at center, #112211 0%, #051105 100%); border-color:var(--success-color);">
-                <span class="route-label start-lbl" style="color:var(--success-color); top: 50%;">현재가 ($178)</span>
-                <span class="route-label end-lbl" style="color:var(--success-color); top: 20%;">예측가 ($192)</span>
+                <span class="route-label start-lbl" style="color:var(--success-color); top: 50%;">현재가 (₩2,382,000)</span>
+                <span class="route-label end-lbl" style="color:var(--success-color); top: 20%;">예측가 (₩2,585,000)</span>
                 <svg width="100%" height="100%" style="position:absolute; inset:0; overflow:visible;">
                     <path d="M 45 80 Q 110 75, 170 55 T 255 35" fill="none" stroke="var(--success-color)" stroke-width="2.5" stroke-dasharray="4" stroke-dashoffset="0"/>
                     <circle cx="45" cy="80" r="4" fill="var(--success-color)"/>
@@ -429,7 +447,7 @@ const ACTION_RESPONSES = {
         `
     },
     stock_financials: {
-        title: 'Alphabet Inc. 재무 성과',
+        title: 'SK하이닉스 재무 성과',
         html: `
             <h4>최근 정식 공시 분기 실적 요약</h4>
             <table class="modal-table">
@@ -440,26 +458,26 @@ const ACTION_RESPONSES = {
                 </tr>
                 <tr>
                     <td style="font-weight:500;">총 매출액 (Revenue)</td>
-                    <td style="text-align: right;">$80.54 Billion</td>
-                    <td style="text-align: right; color:var(--success-color); font-weight:600;">+15.4%</td>
+                    <td style="text-align: right;">12.43조 원</td>
+                    <td style="text-align: right; color:var(--success-color); font-weight:600;">+144.3%</td>
                 </tr>
                 <tr>
                     <td style="font-weight:500;">영업이익 (Operating Income)</td>
-                    <td style="text-align: right;">$25.77 Billion</td>
-                    <td style="text-align: right; color:var(--success-color); font-weight:600;">+24.2%</td>
+                    <td style="text-align: right;">2.88조 원</td>
+                    <td style="text-align: right; color:var(--success-color); font-weight:600;">흑자전환</td>
                 </tr>
                 <tr>
                     <td style="font-weight:500;">주당순이익 (EPS)</td>
-                    <td style="text-align: right;">$1.89</td>
-                    <td style="text-align: right; color:var(--success-color); font-weight:600;">+26.1%</td>
+                    <td style="text-align: right;">₩3,850</td>
+                    <td style="text-align: right; color:var(--success-color); font-weight:600;">흑자전환</td>
                 </tr>
             </table>
         `
     },
     stock_competitors: {
-        title: '동일 업계 빅테크 비교',
+        title: '동종 반도체 기업 비교',
         html: `
-            <h4>주요 빅테크 기업 투자 분석 지표</h4>
+            <h4>주요 반도체 기업 투자 분석 지표</h4>
             <table class="modal-table">
                 <tr>
                     <th>TICKER</th>
@@ -468,25 +486,25 @@ const ACTION_RESPONSES = {
                     <th style="text-align: right;">시가총액</th>
                 </tr>
                 <tr>
-                    <td style="font-weight:600; color:var(--success-color);">GOOGL</td>
-                    <td style="text-align: center;">25.4x</td>
-                    <td style="text-align: center;">32.0%</td>
-                    <td style="text-align: right;">$2.25 Trillion</td>
+                    <td style="font-weight:600; color:var(--success-color);">SK하이닉스 (000660)</td>
+                    <td style="text-align: center;">18.5x</td>
+                    <td style="text-align: center;">23.2%</td>
+                    <td style="text-align: right;">163.4조 원</td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;">MSFT</td>
-                    <td style="text-align: center;">36.2x</td>
-                    <td style="text-align: center;">43.5%</td>
-                    <td style="text-align: right;">$3.18 Trillion</td>
+                    <td style="font-weight:600;">삼성전자 (005930)</td>
+                    <td style="text-align: center;">22.1x</td>
+                    <td style="text-align: center;">11.5%</td>
+                    <td style="text-align: right;">462.1조 원</td>
                 </tr>
                 <tr>
-                    <td style="font-weight:600;">AAPL</td>
-                    <td style="text-align: center;">30.8x</td>
-                    <td style="text-align: center;">30.1%</td>
-                    <td style="text-align: right;">$3.24 Trillion</td>
+                    <td style="font-weight:600;">Micron (MU)</td>
+                    <td style="text-align: center;">24.8x</td>
+                    <td style="text-align: center;">-4.2%</td>
+                    <td style="text-align: right;">$142 Billion</td>
                 </tr>
             </table>
-            <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.75rem; line-height:1.4;">💡 경쟁사 대비 구글(GOOGL)은 상대적으로 낮은 P/E 밸류에이션 부담이 가장 낮은 축에 속합니다.</p>
+            <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.75rem; line-height:1.4;">💡 글로벌 메모리 반도체 업계에서 SK하이닉스는 강력한 HBM 제품군 수요에 힘입어 높은 영업이익률 성장세를 보이고 있습니다.</p>
         `
     }
 };
@@ -750,6 +768,7 @@ function executeAIAction(action, themeColor) {
     } else if (action === 'stock_competitors') {
         ACTION_RESPONSES.stock_competitors.html = getStockCompetitorsHTML();
     } else if (action === 'find_route') {
+        detectUserLocation();
         ACTION_RESPONSES.find_route.html = getFindRouteHTML();
     } else if (action === 'visual_search') {
         ACTION_RESPONSES.visual_search.html = getVisualSearchHTML();
@@ -757,6 +776,8 @@ function executeAIAction(action, themeColor) {
         ACTION_RESPONSES.translate_sign.html = getTranslateSignHTML();
     } else if (action === 'news_verification') {
         ACTION_RESPONSES.news_verification.html = getNewsVerificationHTML();
+    } else if (action === 'news_translation') {
+        prepareNewsTranslation();
     } else if (action === 'news_bias') {
         ACTION_RESPONSES.news_bias.html = getNewsBiasHTML();
     } else if (action === 'news_coverage') {
@@ -791,6 +812,55 @@ function executeAIAction(action, themeColor) {
     }, 1200);
 }
 
+let userCurrentLocationName = "개찰구 (B2F)";
+let hasDetectedLocation = false;
+
+function detectUserLocation() {
+    if (hasDetectedLocation) return;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                try {
+                    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1&accept-language=ko`, {
+                        headers: {
+                            'Accept-Language': 'ko'
+                        }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && data.address) {
+                            const addr = data.address;
+                            const neighborhood = addr.neighbourhood || addr.suburb || addr.town || addr.village || addr.city_district || addr.borough || addr.city || "현재 위치";
+                            userCurrentLocationName = neighborhood;
+                            hasDetectedLocation = true;
+                            console.log("User location detected via reverse geocoding:", userCurrentLocationName);
+                            updateRouteStartLabel(userCurrentLocationName);
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Reverse geocoding query failed:", e);
+                    userCurrentLocationName = `${lat.toFixed(3)}°N, ${lon.toFixed(3)}°E`;
+                    hasDetectedLocation = true;
+                    updateRouteStartLabel(userCurrentLocationName);
+                }
+            },
+            (err) => {
+                console.warn("Geolocation permission or reading failed:", err);
+            },
+            { timeout: 6000 }
+        );
+    }
+}
+
+function updateRouteStartLabel(locName) {
+    const startNodeEl = document.getElementById('route-start-node');
+    if (startNodeEl) {
+        startNodeEl.textContent = locName;
+    }
+}
+
 let routeSimInterval = null;
 function startRouteSimulation() {
     if (routeSimInterval) clearInterval(routeSimInterval);
@@ -802,26 +872,27 @@ function startRouteSimulation() {
     
     if (!dot || !progressBar || !stepTitle) return;
     
+    const startNodeText = userCurrentLocationName || "개찰구 (B2F)";
     const steps = [
         {
-            title: "1단계: 지하철 개찰구 통과 (출발지)",
-            desc: "동대문역사문화공원역 지하 2층 대합실에서 출발합니다. 1번 출구 연결 통로로 유도 표지판을 따라 진입하세요.",
+            title: `1단계: ${startNodeText} 출발 (출발지)`,
+            desc: `${startNodeText}에서 동대문디자인플라자(DDP)로 이동하기 위한 최적 보행/교통 경로 탐색을 완료했습니다.`,
             left: "45px",
             top: "45px",
             progress: "0%",
             dashoffset: "300"
         },
         {
-            title: "2단계: DDP 지하 연결 무빙워크 탑승",
-            desc: "지하 지하철 연계 통로에 설치된 에스컬레이터 및 무빙워크를 타고 동대문역사문화공원 역외 지하 광장 방면으로 내려갑니다.",
+            title: "2단계: 동대문역사문화공원역 하차 후 진입",
+            desc: "지하철 2/4/5호선 하차 후 DDP 1번 출구 연결 통로로 진입합니다. 안내 표지판을 따라 무장애 통로로 이동하세요.",
             left: "97px",
             top: "62px",
             progress: "33%",
             dashoffset: "200"
         },
         {
-            title: "3단계: DDP 어울림광장 진입 (B2F)",
-            desc: "야외 원형 지하광장인 어울림광장에 도착했습니다. 우주선 형태의 비정형 콘크리트 및 은빛 패널 곡면이 시야에 들어옵니다.",
+            title: "3단계: DDP 지하 연결 어울림광장 진입",
+            desc: "야외 원형 지하광장인 어울림광장에 진입했습니다. 미래 우주선 형태의 비정형 곡면 노출 콘크리트 전경이 나타납니다.",
             left: "150px",
             top: "80px",
             progress: "66%",
@@ -829,7 +900,7 @@ function startRouteSimulation() {
         },
         {
             title: "4단계: DDP 배움터 B2F 입구 도착",
-            desc: "어울림광장 정면에 위치한 배움터 지하 2층 대형 슬라이딩 입구에 성공적으로 도착했습니다. 단차가 없는 완전한 무장애 보행로입니다.",
+            desc: "어울림광장을 지나 배움터(Museum) 지하 2층 대형 입구에 최종 도착했습니다. 단차가 없는 편리한 보행로입니다.",
             left: "255px",
             top: "45px",
             progress: "100%",
@@ -901,30 +972,65 @@ let currentStockPrice = 2382000;
 let stockBasePrice = 2288000;
 const stockHistory = [];
 const maxHistoryPoints = 15;
+function getKSTMarketStatus() {
+    try {
+        const formatter = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Seoul',
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric', second: 'numeric',
+            weekday: 'short',
+            hour12: false
+        });
+        const parts = formatter.formatToParts(new Date());
+        const val = {};
+        parts.forEach(p => val[p.type] = p.value);
+        
+        const weekdayMap = { 'Sun': 0, 'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6 };
+        const day = weekdayMap[val.weekday];
+        const hours = parseInt(val.hour, 10);
+        const minutes = parseInt(val.minute, 10);
+        
+        if (day === 0 || day === 6) return 'closed';
+        const timeVal = hours * 100 + minutes;
+        if (timeVal >= 900 && timeVal <= 1530) return 'regular';
+        if ((timeVal >= 800 && timeVal < 900) || (timeVal > 1530 && timeVal <= 1800)) return 'prepost';
+        return 'closed';
+    } catch (e) {
+        const now = new Date();
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const kst = new Date(utc + (3600000 * 9));
+        const day = kst.getDay();
+        const hours = kst.getHours();
+        const minutes = kst.getMinutes();
+        if (day === 0 || day === 6) return 'closed';
+        const timeVal = hours * 100 + minutes;
+        if (timeVal >= 900 && timeVal <= 1530) return 'regular';
+        if ((timeVal >= 800 && timeVal < 900) || (timeVal > 1530 && timeVal <= 1800)) return 'prepost';
+        return 'closed';
+    }
+}
+
 function isKSTMarketOpen() {
-    const now = new Date();
-    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-    const kst = new Date(utc + (3600000 * 9));
-    const day = kst.getDay();
-    const hours = kst.getHours();
-    const minutes = kst.getMinutes();
-    if (day === 0 || day === 6) return false;
-    const timeVal = hours * 100 + minutes;
-    return timeVal >= 900 && timeVal <= 1530;
+    const status = getKSTMarketStatus();
+    return status === 'regular' || status === 'prepost';
 }
 
 function updateMarketStatusUI() {
-    const open = isKSTMarketOpen();
+    const status = getKSTMarketStatus();
     const badges = document.querySelectorAll('.market-status-badge');
     badges.forEach(badge => {
-        if (open) {
+        if (status === 'regular') {
             badge.textContent = '● 장중 실시간';
             badge.className = 'market-status-badge open';
-            badge.title = '한국 표준시(KST) 정규 거래 시간 내 실시간 시세 반영 중';
+            badge.title = '한국 표준시(KST) 정규 거래 시간 내 실시간 시세 반영 중 (09:00 - 15:30)';
+        } else if (status === 'prepost') {
+            badge.textContent = '● 장외 거래';
+            badge.className = 'market-status-badge prepost';
+            badge.title = '한국 표준시(KST) 시간외 거래 시간 (08:00-09:00 / 15:30-18:00)';
         } else {
             badge.textContent = '● 장마감';
             badge.className = 'market-status-badge closed';
-            badge.title = '정규장 마감 상태 (KST 09:00 - 15:30 개장)';
+            badge.title = '정규 및 시간외 거래 마감 (평일 09:00 - 15:30 개장)';
         }
     });
 }
@@ -1131,15 +1237,7 @@ function updateStockChart() {
 
 function tickStock() {
     if (isEmbedded) return;
-    if (!isKSTMarketOpen()) return;
-    const change = (Math.random() - 0.5) * 15000;
-    currentStockPrice = Math.max(1500000, Math.min(3000000, currentStockPrice + change));
-    currentStockPrice = Math.round(currentStockPrice / 1000) * 1000;
-    
-    stockHistory.shift();
-    stockHistory.push(currentStockPrice);
-    
-    updateStockChart();
+    updateMarketStatusUI();
 }
 
 // Real-time weather/stock dynamic AI reports
@@ -1354,7 +1452,7 @@ function getFindRouteHTML() {
                 <!-- Grid lines to look like architectural blueprint -->
                 <div style="position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 15px 15px;"></div>
                 
-                <span class="route-label start-lbl" style="position:absolute; left:20px; top:25px; font-size:0.75rem; color:var(--primary-color); font-weight:600;">개찰구 (B2F)</span>
+                <span class="route-label start-lbl" id="route-start-node" style="position:absolute; left:20px; top:25px; font-size:0.75rem; color:var(--primary-color); font-weight:600;">${userCurrentLocationName}</span>
                 <span class="route-label mid-lbl" style="position:absolute; left:135px; top:85px; font-size:0.75rem; color:var(--warning-color); font-weight:600;">어울림광장</span>
                 <span class="route-label end-lbl" style="position:absolute; right:20px; top:25px; font-size:0.75rem; color:var(--success-color); font-weight:600;">배움터 입구</span>
                 
@@ -1417,6 +1515,182 @@ function getTranslateSignHTML() {
 【Operating hours for Dongdaemun Design Plaza (DDP) exhibition halls and facilities vary by zone. To ensure a safe viewing environment, smoking and riding personal mobility devices (such as electric kickboards and bicycles) on the outdoor grass slope areas are strictly prohibited.】
         </div>
     `;
+}
+
+async function translateText(text) {
+    if (!text) return "";
+    const trimmed = text.trim();
+    if (trimmed === "Global Green Energy Transition Reaches Critical Milestone") {
+        return "전세계 친환경 에너지 전환, 중대한 이정표 도달";
+    }
+    if (trimmed.startsWith("Renewable energy installations have officially surpassed")) {
+        return "1분기 주요 전력망에서 신재생 에너지 설비 용량이 사상 처음으로 화석 연료 배포량을 추월했으며, 이는 기존 예측 모델보다 빠른 피벗을 나타냅니다.";
+    }
+    
+    try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ko&dt=t&q=${encodeURIComponent(trimmed)}`;
+        const res = await fetch(url);
+        if (res.ok) {
+            const data = await res.json();
+            if (data && data[0]) {
+                return data[0].map(item => item[0]).join('');
+            }
+        }
+    } catch (e) {
+        console.warn("Direct translation fetch failed, trying proxy:", e);
+    }
+    
+    try {
+        const url = `https://corsproxy.io/?url=` + encodeURIComponent(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ko&dt=t&q=${encodeURIComponent(trimmed)}`);
+        const res = await fetch(url);
+        if (res.ok) {
+            const data = await res.json();
+            if (data && data[0]) {
+                return data[0].map(item => item[0]).join('');
+            }
+        }
+    } catch (e) {
+        console.warn("Proxy translation fetch failed, using fallback:", e);
+    }
+    
+    return fallbackTranslate(trimmed);
+}
+
+function fallbackTranslate(text) {
+    let t = text;
+    const dict = {
+        "Global Green Energy Transition Reaches Critical Milestone": "전세계 친환경 에너지 전환, 중대한 이정표 도달",
+        "Renewable energy installations have officially surpassed fossil fuel deployment in major grids for the first quarter, signaling a faster pivot than previously projected by models.": "1분기 주요 전력망에서 신재생 에너지 설비 용량이 사상 처음으로 화석 연료 배포량을 추월했으며, 이는 기존 예측 모델보다 빠른 피벗을 나타냅니다.",
+        "Transition": "전환",
+        "Milestone": "이정표",
+        "Renewable": "신재생",
+        "energy": "에너지",
+        "fossil fuel": "화석 연료",
+        "deployment": "배포/설치",
+        "surpassed": "추월함",
+        "projected": "예측된",
+        "models": "모델",
+        "Silicon": "실리콘",
+        "Semiconductor": "반도체",
+        "Quantum": "양자",
+        "Computing": "컴퓨팅",
+        "Artificial Intelligence": "인공지능",
+        "Intelligence": "지능",
+        "Robotics": "로봇공학",
+        "Robot": "로봇",
+        "announced": "발표함",
+        "launches": "출시함",
+        "unveils": "공개함",
+        "shares": "주가/공유",
+        "stocks": "주식",
+        "earnings": "실적",
+        "quarter": "분기",
+        "revenue": "매출",
+        "profit": "이익",
+        "company": "기업",
+        "technology": "기술",
+        "system": "시스템",
+        "chip": "칩",
+        "processor": "프로세서",
+        "Nvidia": "엔비디아",
+        "Apple": "애플",
+        "Google": "구글",
+        "Microsoft": "마이크로소프트",
+        "Samsung": "삼성",
+        "Intel": "인텔"
+    };
+    const sortedKeys = Object.keys(dict).sort((a, b) => b.length - a.length);
+    for (const key of sortedKeys) {
+        const regex = new RegExp(key.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
+        t = t.replace(regex, dict[key]);
+    }
+    return t;
+}
+
+function generateSummaryPoints(translatedTitle, translatedDesc) {
+    if (translatedTitle.includes("친환경 에너지") || translatedTitle.includes("Green Energy")) {
+        return [
+            "신재생 에너지의 도약: 올해 1분기 주요 전력망에서 태양광 및 풍력 등 신재생 에너지 설치량이 사상 처음으로 화석 연료를 추월했습니다.",
+            "예측보다 빠른 피벗: 글로벌 탄소 배출 저감 및 신재생 그리드 구축 속도가 기후 학계의 예측 모델보다 훨씬 빠르게 진행되고 있습니다.",
+            "지속 가능한 패러다임: 주요 선진국들의 전력망 체질이 환경 친화적 및 영구적 자립 에너지 시스템으로 급속히 재편되고 있음을 의미합니다."
+        ];
+    }
+    
+    const sentences = translatedDesc.split(/[.!?]\s+/).filter(s => s.trim().length > 0);
+    const p1 = `주요 동향: ${translatedTitle} 관련하여 신규 테크 트렌드 분석 보고가 발행되었습니다.`;
+    const p2 = sentences[0] ? `핵심 팩트: ${sentences[0]}.` : "핵심 분석: 보도 자료에 서술된 주요 지표와 팩트 검증이 완료되었습니다.";
+    const p3 = sentences[1] ? `산업적 영향: ${sentences[1]}.` : "산업적 전망: 본 발표가 글로벌 시장 및 생태계 미칠 파급력을 주목할 필요가 있습니다.";
+    
+    return [p1, p2, p3];
+}
+
+async function prepareNewsTranslation() {
+    const title = currentNewsArticle.title;
+    const desc = currentNewsArticle.description;
+    
+    ACTION_RESPONSES.news_translation.html = `
+        <div style="text-align: center; padding: 1.5rem 0;">
+            <div class="loader-spinner" style="margin: 0 auto 1rem auto; width: 36px; height: 36px;"></div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">실시간 뉴스를 번역 및 3줄 요약 생성 중입니다...</p>
+        </div>
+    `;
+    
+    const modalResult = document.getElementById('modal-result');
+    if (modalResult) {
+        modalResult.innerHTML = ACTION_RESPONSES.news_translation.html;
+    }
+    
+    try {
+        const translatedTitle = await translateText(title);
+        const translatedDesc = await translateText(desc);
+        const summaryPoints = generateSummaryPoints(translatedTitle, translatedDesc);
+        
+        ACTION_RESPONSES.news_translation.html = `
+            <h4>📰 실시간 뉴스 한글 요약 및 번역</h4>
+            <div style="margin-bottom: 0.75rem; border-bottom: 1px solid var(--modal-item-border); padding-bottom: 0.75rem;">
+                <span style="font-size: 0.7rem; color: var(--cyan-color); font-weight: 600; display: block; margin-bottom: 0.25rem;">[원문] ${currentNewsArticle.source || "BBC Technology"}</span>
+                <strong style="font-size: 0.9rem; line-height: 1.4; display: block; margin-bottom: 0.4rem; color: #fff;">${title}</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin: 0;">${desc}</p>
+            </div>
+            
+            <div style="margin-bottom: 0.75rem; background: rgba(0, 229, 255, 0.04); border: 1px solid rgba(0, 229, 255, 0.12); padding: 0.6rem; border-radius: 8px;">
+                <span style="font-size: 0.7rem; color: var(--cyan-color); font-weight: 600; display: block; margin-bottom: 0.25rem;">[한글 번역]</span>
+                <strong style="font-size: 0.9rem; line-height: 1.4; display: block; margin-bottom: 0.4rem; color: #fff;">${translatedTitle}</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin: 0;">${translatedDesc}</p>
+            </div>
+            
+            <div>
+                <span style="font-size: 0.7rem; color: var(--success-color); font-weight: 600; display: block; margin-bottom: 0.4rem;">[AI 3줄 요약]</span>
+                <ul style="margin: 0; padding-left: 0; list-style: none;">
+                    <li style="font-size: 0.8rem; line-height: 1.4; margin-bottom: 0.4rem; display: flex; align-items: flex-start; gap: 6px;">
+                        <span style="color: var(--success-color); font-weight: 700;">1.</span>
+                        <span>${summaryPoints[0]}</span>
+                    </li>
+                    <li style="font-size: 0.8rem; line-height: 1.4; margin-bottom: 0.4rem; display: flex; align-items: flex-start; gap: 6px;">
+                        <span style="color: var(--success-color); font-weight: 700;">2.</span>
+                        <span>${summaryPoints[1]}</span>
+                    </li>
+                    <li style="font-size: 0.8rem; line-height: 1.4; display: flex; align-items: flex-start; gap: 6px;">
+                        <span style="color: var(--success-color); font-weight: 700;">3.</span>
+                        <span>${summaryPoints[2]}</span>
+                    </li>
+                </ul>
+            </div>
+        `;
+        
+        const modalLoader = document.getElementById('modal-loader');
+        if (modalLoader && modalLoader.classList.contains('hidden') && modalResult) {
+            modalResult.innerHTML = ACTION_RESPONSES.news_translation.html;
+        }
+    } catch (err) {
+        console.error("News translation failed:", err);
+        ACTION_RESPONSES.news_translation.html = `
+            <p>실시간 번역을 수행하는 도중 에러가 발생했습니다. 원문 텍스트를 참고해 주세요.</p>
+        `;
+        if (modalResult) {
+            modalResult.innerHTML = ACTION_RESPONSES.news_translation.html;
+        }
+    }
 }
 
 function getNewsVerificationHTML() {
@@ -1620,6 +1894,21 @@ if (isEmbedded) {
     fetchRealTimeWeather();
     fetchSKHynixPrice();
     fetchRealTimeNews();
-    updateMarketStatusUI();
     setInterval(tickStock, 1000);
+    
+    // Periodic API Polling (Real-time updates)
+    setInterval(() => {
+        fetchRealTimeWeather();
+    }, 300000);
+
+    setInterval(() => {
+        const status = getKSTMarketStatus();
+        if (status === 'regular' || status === 'prepost') {
+            fetchSKHynixPrice();
+        }
+    }, 15000);
+
+    setInterval(() => {
+        fetchRealTimeNews();
+    }, 180000);
 }
