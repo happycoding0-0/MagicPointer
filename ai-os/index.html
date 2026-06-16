@@ -120,7 +120,7 @@
             <div class="window-content">
                 <section class="sim-card card-image" data-ai-type="image" data-ai-title="Dongdaemun Design Plaza (DDP)" data-ai-desc="Futuristic architectural landmark in Seoul designed by Zaha Hadid.">
                     <div class="card-media">
-                        <img src="/ai-os/assets/travel.png" alt="Dongdaemun Design Plaza (DDP) at Night" loading="lazy">
+                        <img src="/ai-os/assets/travel.png?v=ddp3" alt="Dongdaemun Design Plaza (DDP) at Night" loading="lazy">
                         <div class="media-overlay"></div>
                         <span class="context-tag"><span class="material-symbols-rounded">image</span>Image Context</span>
                     </div>
@@ -181,6 +181,10 @@
             <div class="window-content">
                 <section class="sim-card card-weather" data-ai-type="weather" data-ai-title="Seoul Weather Forecast" data-ai-desc="Dynamic meteorological metrics tracking high humidity and fine dust.">
                     <span class="context-tag"><span class="material-symbols-rounded">thermostat</span>Data Context</span>
+                    <div class="weather-location" style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 4px;">
+                        <span class="material-symbols-rounded" style="font-size: 0.85rem; color: var(--warning-color);">location_on</span>
+                        <span class="location-name">서울 노원구 월계동 (광운인공지능고 관측)</span>
+                    </div>
                     <div class="weather-display">
                         <div class="weather-temp">
                             <h2>26<span>°C</span></h2>
@@ -192,6 +196,9 @@
                                 <span class="metric"><span class="material-symbols-rounded">water_drop</span> 72%</span>
                                 <span class="metric"><span class="material-symbols-rounded">air</span> 3.2m/s</span>
                                 <span class="metric"><span class="material-symbols-rounded">grain</span> PM2.5: Good</span>
+                            </div>
+                            <div class="weather-update-time" style="font-size: 0.65rem; color: var(--text-secondary); margin-top: 0.5rem; opacity: 0.7; font-family: var(--font-mono);">
+                                실시간 관측: <span class="weather-time-stamp">-</span>
                             </div>
                         </div>
                     </div>
@@ -252,7 +259,7 @@
                         <div class="stock-name">
                             <div style="display: flex; align-items: center;">
                                 <h3>000660</h3>
-                                <span class="market-status-badge closed" style="cursor: pointer;" title="클릭하여 모의 시뮬레이션 토글">● 장마감</span>
+                                <span class="market-status-badge closed">● 장마감</span>
                             </div>
                             <span class="stock-company">SK하이닉스</span>
                         </div>

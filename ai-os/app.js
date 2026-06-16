@@ -1052,14 +1052,86 @@ function executeAIAction(action, themeColor) {
         
         if (res) {
             modalResult.innerHTML = res.html;
+            if (action === 'find_route') {
+                startRouteSimulation();
+            }
         } else {
             modalResult.innerHTML = `<p>요청하신 작업이 성공적으로 처리되었습니다.</p>`;
         }
     }, 1200);
 }
 
+let routeSimInterval = null;
+function startRouteSimulation() {
+    if (routeSimInterval) clearInterval(routeSimInterval);
+    const dot = document.getElementById('routing-dot');
+    const progressBar = document.getElementById('route-progress-bar');
+    const pathProgress = document.getElementById('route-progress-path');
+    const stepTitle = document.getElementById('step-title');
+    const stepDesc = document.getElementById('step-desc');
+    
+    if (!dot || !progressBar || !stepTitle) return;
+    
+    const steps = [
+        {
+            title: "1단계: 지하철 개찰구 통과 (출발지)",
+            desc: "동대문역사문화공원역 지하 2층 대합실에서 출발합니다. 1번 출구 연결 통로로 유도 표지판을 따라 진입하세요.",
+            left: "45px",
+            top: "45px",
+            progress: "0%",
+            dashoffset: "300"
+        },
+        {
+            title: "2단계: DDP 지하 연결 무빙워크 탑승",
+            desc: "지하 지하철 연계 통로에 설치된 에스컬레이터 및 무빙워크를 타고 동대문역사문화공원 역외 지하 광장 방면으로 내려갑니다.",
+            left: "97px",
+            top: "62px",
+            progress: "33%",
+            dashoffset: "200"
+        },
+        {
+            title: "3단계: DDP 어울림광장 진입 (B2F)",
+            desc: "야외 원형 지하광장인 어울림광장에 도착했습니다. 우주선 형태의 비정형 콘크리트 및 은빛 패널 곡면이 시야에 들어옵니다.",
+            left: "150px",
+            top: "80px",
+            progress: "66%",
+            dashoffset: "150"
+        },
+        {
+            title: "4단계: DDP 배움터 B2F 입구 도착",
+            desc: "어울림광장 정면에 위치한 배움터 지하 2층 대형 슬라이딩 입구에 성공적으로 도착했습니다. 단차가 없는 완전한 무장애 보행로입니다.",
+            left: "255px",
+            top: "45px",
+            progress: "100%",
+            dashoffset: "0"
+        }
+    ];
+    
+    let currentStep = 0;
+    const runStep = () => {
+        const step = steps[currentStep];
+        dot.style.left = step.left;
+        dot.style.top = step.top;
+        progressBar.style.width = step.progress;
+        if (pathProgress) {
+            pathProgress.style.strokeDashoffset = step.dashoffset;
+        }
+        stepTitle.textContent = step.title;
+        stepDesc.textContent = step.desc;
+        currentStep = (currentStep + 1) % steps.length;
+    };
+    
+    runStep();
+    routeSimInterval = setInterval(runStep, 3500);
+}
+
+// Modal closing
 function closeModal() {
     responseModal.classList.remove('show');
+    if (routeSimInterval) {
+        clearInterval(routeSimInterval);
+        routeSimInterval = null;
+    }
     setTimeout(() => {
         responseModal.classList.add('hidden');
     }, 300);
@@ -1182,8 +1254,6 @@ let currentStockPrice = 2382000;
 let stockBasePrice = 2288000;
 const stockHistory = [];
 const maxHistoryPoints = 15;
-let forceSimulationMode = false;
-
 function isKSTMarketOpen() {
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -1201,19 +1271,13 @@ function updateMarketStatusUI() {
     const badges = document.querySelectorAll('.market-status-badge');
     badges.forEach(badge => {
         if (open) {
-            badge.textContent = '● 정규장';
+            badge.textContent = '● 장중 실시간';
             badge.className = 'market-status-badge open';
             badge.title = '한국 표준시(KST) 정규 거래 시간 내 실시간 시세 반영 중';
         } else {
-            if (forceSimulationMode) {
-                badge.textContent = '● 장마감 (모의 변동)';
-                badge.className = 'market-status-badge closed simulation';
-                badge.title = '장 마감 상태이나 클릭하여 정적 시세로 전환';
-            } else {
-                badge.textContent = '● 장마감 (시세 고정)';
-                badge.className = 'market-status-badge closed';
-                badge.title = '정규장 마감 상태. 클릭하면 모의 변동 시뮬레이션이 활성화됩니다.';
-            }
+            badge.textContent = '● 장마감';
+            badge.className = 'market-status-badge closed';
+            badge.title = '정규장 마감 상태 (KST 09:00 - 15:30 개장)';
         }
     });
 }
@@ -1237,11 +1301,6 @@ window.getCurrentStockPrice = () => currentStockPrice;
 window.getCurrentStockHistory = () => stockHistory;
 window.getCurrentStockBasePrice = () => stockBasePrice;
 window.getCurrentWeatherData = () => currentWeatherData;
-window.getForceSimulationMode = () => forceSimulationMode;
-window.toggleSimulationMode = () => {
-    forceSimulationMode = !forceSimulationMode;
-    updateMarketStatusUI();
-};
 
 // Weather Icon Mapping
 function getWeatherIconAndDesc(code, isNight) {
@@ -1301,6 +1360,18 @@ function updateWeatherUI(temp, humidity, windSpeed, weatherCode, isNight) {
     if (metricsEl.length >= 2) {
         metricsEl[0].innerHTML = `<span class="material-symbols-rounded">water_drop</span> ${humidity}%`;
         metricsEl[1].innerHTML = `<span class="material-symbols-rounded">air</span> ${windSpeed}m/s`;
+    }
+    
+    const timeStampEl = weatherCard.querySelector('.weather-time-stamp');
+    if (timeStampEl) {
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        const hh = String(now.getHours()).padStart(2, '0');
+        const min = String(now.getMinutes()).padStart(2, '0');
+        const sec = String(now.getSeconds()).padStart(2, '0');
+        timeStampEl.textContent = `${yyyy}-${mm}-${dd} ${hh}:${min}:${sec}`;
     }
 }
 
@@ -1390,7 +1461,7 @@ function updateStockChart() {
 }
 
 function tickStock() {
-    if (!isKSTMarketOpen() && !forceSimulationMode) return;
+    if (!isKSTMarketOpen()) return;
     const change = (Math.random() - 0.5) * 15000;
     currentStockPrice = Math.max(1500000, Math.min(3000000, currentStockPrice + change));
     currentStockPrice = Math.round(currentStockPrice / 1000) * 1000;
@@ -1603,20 +1674,45 @@ function getStockCompetitorsHTML() {
 
 function getFindRouteHTML() {
     return `
-        <h4>동대문디자인플라자(DDP) 지하철 연결 경로</h4>
-        <p><strong>동대문역사문화공원역 (2, 4, 5호선) 1번 출구</strong>에서 어울림광장 및 디자인거리로 직접 연결되는 도보 가이드입니다:</p>
-        <div class="route-map-mock" style="height:100px; position:relative; background:rgba(0,0,0,0.2); border:1px solid var(--modal-item-border); border-radius:8px;">
-            <span class="route-label start-lbl" style="left:15px; top:40%; color:var(--primary-color);">역사 대합실 (B2)</span>
-            <span class="route-label end-lbl" style="right:15px; top:40%; color:var(--success-color);">DDP 어울림광장</span>
-            <svg width="100%" height="100%" style="position:absolute; inset:0; overflow:visible;">
-                <path d="M 90 50 Q 150 45, 210 50" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4"/>
-                <circle cx="90" cy="50" r="4.5" fill="var(--primary-color)"/>
-                <circle cx="210" cy="50" r="4.5" fill="var(--success-color)" class="pulsing"/>
-            </svg>
-        </div>
-        <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
-            🚶‍♂️ **이동 방법**: 지하철 개찰구 통과 후 **1번 출구** 방향 무빙워크 탑승 → 지하 어울림광장(Oullim Square)과 배움터 지하 2층 입구가 지하철 출구와 계단 없이 바로 연결되어 유모차 및 휠체어로도 매우 안전하고 편리하게 접근할 수 있습니다.
+        <h4>DDP 지하철 출구 연계 실시간 보행 경로</h4>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+            동대문역사문화공원역 <strong>1번 출구</strong>에서 배움터(Museum) 지하 2층 입구까지의 무장애 보행 경로 시뮬레이션입니다.
         </p>
+        
+        <div class="route-simulation-container" style="position:relative; margin-bottom:1rem;">
+            <div class="route-map-mock" style="height:120px; position:relative; background:rgba(12, 15, 23, 0.4); border:1px solid var(--modal-item-border); border-radius:12px; overflow:hidden;">
+                <!-- Grid lines to look like architectural blueprint -->
+                <div style="position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 15px 15px;"></div>
+                
+                <span class="route-label start-lbl" style="position:absolute; left:20px; top:25px; font-size:0.75rem; color:var(--primary-color); font-weight:600;">개찰구 (B2F)</span>
+                <span class="route-label mid-lbl" style="position:absolute; left:135px; top:85px; font-size:0.75rem; color:var(--warning-color); font-weight:600;">어울림광장</span>
+                <span class="route-label end-lbl" style="position:absolute; right:20px; top:25px; font-size:0.75rem; color:var(--success-color); font-weight:600;">배움터 입구</span>
+                
+                <svg width="100%" height="100%" style="position:absolute; inset:0; overflow:visible;">
+                    <!-- Static Path -->
+                    <path id="route-path" d="M 45 45 L 150 80 L 255 45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4" stroke-linecap="round"/>
+                    <!-- Active animated progress path -->
+                    <path id="route-progress-path" d="M 45 45 L 150 80 L 255 45" fill="none" stroke="var(--primary-color)" stroke-width="4" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="300"/>
+                    
+                    <!-- Nodes -->
+                    <circle cx="45" cy="45" r="6" fill="var(--primary-color)" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+                    <circle cx="150" cy="80" r="6" fill="var(--warning-color)" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+                    <circle cx="255" cy="45" r="6" fill="var(--success-color)" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+                </svg>
+                
+                <!-- Animated avatar or dot -->
+                <div id="routing-dot" style="position:absolute; width:12px; height:12px; background:var(--cyan-color); border:2px solid #fff; border-radius:50%; box-shadow:0 0 10px var(--cyan-color); transform:translate(-50%, -50%); left:45px; top:45px; transition: left 0.8s ease, top 0.8s ease;"></div>
+            </div>
+            
+            <div class="progress-bar-container" style="height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden; margin-top:0.5rem;">
+                <div id="route-progress-bar" style="width:0%; height:100%; background:linear-gradient(90deg, var(--primary-color), var(--cyan-color)); transition: width 0.8s ease;"></div>
+            </div>
+        </div>
+        
+        <div class="route-steps" style="background:rgba(255,255,255,0.03); border:1px solid var(--modal-item-border); border-radius:8px; padding:12px;">
+            <div id="step-title" style="font-size:0.9rem; font-weight:600; color:var(--cyan-color); margin-bottom:4px;">시뮬레이션 대기 중...</div>
+            <div id="step-desc" style="font-size:0.8rem; color:var(--text-secondary); line-height:1.4;">경로 안내를 시작합니다.</div>
+        </div>
     `;
 }
 
@@ -1817,12 +1913,3 @@ fetchSKHynixPrice();
 fetchRealTimeNews();
 updateMarketStatusUI();
 setInterval(tickStock, 1000);
-
-document.addEventListener('click', (e) => {
-    const badge = e.target.closest('.market-status-badge');
-    if (badge) {
-        if (isKSTMarketOpen()) return;
-        forceSimulationMode = !forceSimulationMode;
-        updateMarketStatusUI();
-    }
-});
