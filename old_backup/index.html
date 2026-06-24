@@ -30,24 +30,27 @@
                 <h1>Magic Pointer</h1>
             </div>
             <p class="subtitle">Google DeepMind AI Interaction Paradigm Simulation</p>
-            <div class="status-indicator">
-                <span class="status-dot pulsing"></span>
-                <span class="status-text">AI Cursor Engine: Active</span>
+            <div class="header-actions">
+                <a href="ai-os/index.html" class="launch-os-btn"><span class="material-symbols-rounded">desktop_windows</span>MagicOS 데스크톱 실행</a>
+                <div class="status-indicator">
+                    <span class="status-dot pulsing"></span>
+                    <span class="status-text">AI Cursor Engine: Active</span>
+                </div>
             </div>
         </header>
 
         <main class="simulation-grid">
             <!-- 1. Travel Image Element -->
-            <section class="sim-card card-image" data-ai-type="image" data-ai-title="Kyoto Eco-Resort" data-ai-desc="Futuristic glass architecture nestled in Kyoto's bamboo valley.">
+            <section class="sim-card card-image" data-ai-type="image" data-ai-title="Dongdaemun Design Plaza (DDP)" data-ai-desc="Futuristic architectural landmark in Seoul designed by Zaha Hadid.">
                 <div class="card-media">
-                    <img src="assets/travel.png" alt="Kyoto Eco-Resort" loading="lazy">
+                    <img src="assets/travel.png?v=ddp3" alt="Dongdaemun Design Plaza (DDP) at Night" loading="lazy">
                     <div class="media-overlay"></div>
                     <span class="context-tag"><span class="material-symbols-rounded">image</span>Image Context</span>
                 </div>
                 <div class="card-content">
-                    <h3>Kyoto Glass Eco-Resort</h3>
-                    <p class="location"><span class="material-symbols-rounded">location_on</span>Kyoto, Japan</p>
-                    <p class="description">A sustainable oasis featuring state-of-the-art climate-controlled glass dome pods integrated seamlessly into the historic bamboo forests of Arashiyama.</p>
+                    <h3>동대문디자인플라자 (DDP)</h3>
+                    <p class="location"><span class="material-symbols-rounded">location_on</span>서울 중구 을지로</p>
+                    <p class="description">세계 최대 규모의 3차원 비정형 건축물로, 혁신적인 미래형 우주선 디자인을 갖춘 서울의 랜드마크이자 글로벌 문화/예술/패션 허브입니다.</p>
                 </div>
                 <div class="scan-overlay"></div>
             </section>
@@ -71,6 +74,10 @@
             <!-- 3. Weather Widget Element -->
             <section class="sim-card card-weather" data-ai-type="weather" data-ai-title="Seoul Weather Forecast" data-ai-desc="Dynamic meteorological metrics tracking high humidity and fine dust.">
                 <span class="context-tag"><span class="material-symbols-rounded">thermostat</span>Data Context</span>
+                <div class="weather-location" style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 4px;">
+                    <span class="material-symbols-rounded" style="font-size: 0.85rem; color: var(--warning-color);">location_on</span>
+                    <span class="location-name">서울 노원구 월계동 (광운인공지능고 관측)</span>
+                </div>
                 <div class="weather-display">
                     <div class="weather-temp">
                         <h2>26<span>°C</span></h2>
@@ -83,41 +90,44 @@
                             <span class="metric"><span class="material-symbols-rounded">air</span> 3.2m/s</span>
                             <span class="metric"><span class="material-symbols-rounded">grain</span> PM2.5: Good</span>
                         </div>
+                        <div class="weather-update-time" style="font-size: 0.65rem; color: var(--text-secondary); margin-top: 0.5rem; opacity: 0.7; font-family: var(--font-mono);">
+                            실시간 관측: <span class="weather-time-stamp">-</span>
+                        </div>
                     </div>
                 </div>
                 <div class="scan-overlay"></div>
             </section>
 
             <!-- 4. Futuristic Product Element -->
-            <section class="sim-card card-product" data-ai-type="product" data-ai-title="Nova Chronograph Watch" data-ai-desc="Holographic wearable luxury gadget catalog.">
+            <section class="sim-card card-product" data-ai-type="product" data-ai-title="Apple Vision Pro" data-ai-desc="Apple's spatial computing headset blending digital content with physical space.">
                 <div class="card-media-product">
-                    <img src="assets/product.png" alt="Nova Chronograph" loading="lazy">
+                    <img src="assets/product.png?v=vision2" alt="Apple Vision Pro spatial computer" loading="lazy">
                     <div class="media-overlay"></div>
                     <span class="context-tag"><span class="material-symbols-rounded">shopping_bag</span>Product Context</span>
                 </div>
                 <div class="card-content">
                     <div class="product-header">
-                        <h3>Nova Chronograph V2</h3>
-                        <span class="price">$299.00</span>
+                        <h3>Apple Vision Pro</h3>
+                        <span class="price">$3,499.00</span>
                     </div>
-                    <p class="description">A wearable luxury statement piece displaying real-time holographic schedules, atmospheric telemetry, and biometric sync using custom glass projection technology.</p>
+                    <p class="description">애플의 공간 컴퓨터로, 디지털 콘텐츠와 물리적인 공간을 조화롭게 융합하여 혁신적인 3차원 사용자 인터페이스 및 초고해상도 디스플레이 경험을 선사합니다.</p>
                 </div>
                 <div class="scan-overlay"></div>
             </section>
 
             <!-- 5. YouTube Video Element -->
-            <section class="sim-card card-youtube" data-ai-type="youtube" data-ai-title="Humanoid Robots Future" data-ai-desc="Technological video explaining robot operations.">
+            <section class="sim-card card-youtube" data-ai-type="youtube" data-ai-title="Figure Status Update - OpenAI Speech-to-Speech Reasoning" data-ai-desc="Demo video of Figure 01 robot performing actions using OpenAI reasoning model.">
                 <div class="card-media-youtube">
-                    <img src="assets/youtube.png" alt="YouTube Documentary Thumbnail" loading="lazy">
+                    <img src="assets/youtube.png" alt="Figure 01 Humanoid Robot Demo" loading="lazy">
                     <div class="video-play-overlay">
                         <span class="material-symbols-rounded play-btn-icon">play_circle</span>
                     </div>
-                    <span class="video-duration">14:25</span>
+                    <span class="video-duration">2:35</span>
                     <span class="context-tag"><span class="material-symbols-rounded">play_arrow</span>Video Context</span>
                 </div>
                 <div class="card-content">
-                    <h3>How Humanoid Robots Will Shape the Next Decade</h3>
-                    <p class="channel-info">TechHorizon AI • 1.2M views • 2 days ago</p>
+                    <h3>Figure Status Update - OpenAI Speech-to-Speech Reasoning</h3>
+                    <p class="channel-info">Figure • 7.5M views • 1 year ago</p>
                 </div>
                 <div class="scan-overlay"></div>
             </section>
@@ -136,17 +146,20 @@
                 <div class="scan-overlay"></div>
             </section>
 
-            <!-- 7. GOOGL Stock Element -->
-            <section class="sim-card card-stock" data-ai-type="stock" data-ai-title="GOOGL Market Data" data-ai-desc="Financial asset tracker showing ticker metrics.">
+            <!-- 7. SK Hynix Stock Element -->
+            <section class="sim-card card-stock" data-ai-type="stock" data-ai-title="SK Hynix Market Data" data-ai-desc="Financial asset tracker showing ticker metrics.">
                 <span class="context-tag"><span class="material-symbols-rounded">monitoring</span>Market Context</span>
                 <div class="stock-header">
                     <div class="stock-name">
-                        <h3>GOOGL</h3>
-                        <span class="stock-company">Alphabet Inc. Class A</span>
+                        <div style="display: flex; align-items: center;">
+                            <h3>000660</h3>
+                            <span class="market-status-badge closed">● 장마감</span>
+                        </div>
+                        <span class="stock-company">SK하이닉스</span>
                     </div>
                     <div class="stock-price-group">
-                        <span class="stock-price">$178.45</span>
-                        <span class="stock-change up"><span class="material-symbols-rounded">trending_up</span>+3.80%</span>
+                        <span class="stock-price">₩2,382,000</span>
+                        <span class="stock-change up"><span class="material-symbols-rounded">trending_up</span>+4.11%</span>
                     </div>
                 </div>
                 <!-- SVG line chart representing 7 days stock movement -->
@@ -222,5 +235,36 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        // 임베디드 모드 (OS 서브윈도우 내부 iframe) 대응
+        if (window.self !== window.top) {
+            document.body.classList.add('embedded-mode');
+            
+            // 부모 창의 테마(light-theme) 상태를 감지하여 동기화
+            if (window.parent && window.parent.document.body.classList.contains('light-theme')) {
+                document.body.classList.add('light-theme');
+            }
+            
+            // iframe 내 마우스 움직임을 부모 창(OS)의 커서 좌표계로 프레임 브릿지 전달
+            window.addEventListener('mousemove', (e) => {
+                if (window.frameElement) {
+                    const rect = window.frameElement.getBoundingClientRect();
+                    const parentX = e.clientX + rect.left;
+                    const parentY = e.clientY + rect.top;
+                    
+                    if (window.parent && typeof window.parent.updateMouseCoordinates === 'function') {
+                        window.parent.updateMouseCoordinates(parentX, parentY);
+                    }
+                }
+            });
+
+            // iframe 내부 클릭 시 부모 창의 열려있는 팝업이나 메뉴를 닫도록 이벤트 위임
+            window.addEventListener('mousedown', () => {
+                if (window.parent && typeof window.parent.closeAllPopups === 'function') {
+                    window.parent.closeAllPopups();
+                }
+            });
+        }
+    </script>
 </body>
 </html>

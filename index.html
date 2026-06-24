@@ -3,268 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magic Pointer - AI-Powered Future Mouse Pointer</title>
-    <!-- Google Fonts & Icons -->
+    <title>MagicPointer</title>
+    <!-- Google Fonts & System Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dark-theme">
-    <!-- Custom AI Cursor Elements -->
-    <div id="magic-cursor-dot"></div>
-    <div id="magic-cursor-halo">
-        <!-- SVG for circular progress indication during scanning -->
-        <svg class="progress-ring" width="48" height="48">
-            <circle class="progress-ring__circle" stroke="var(--primary-color)" stroke-width="2" fill="transparent" r="22" cx="24" cy="24"/>
-        </svg>
-        <span class="cursor-icon material-symbols-rounded">select_all</span>
+<body class="light-theme">
+    <!-- 애니메이션 배경 -->
+    <div class="aurora-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+        <div class="aurora-noise"></div>
     </div>
 
-    <!-- App Container -->
-    <div class="app-wrapper">
-        <header class="app-header">
-            <div class="logo">
-                <span class="material-symbols-rounded logo-icon">blur_on</span>
-                <h1>Magic Pointer</h1>
+    <!-- 마우스를 따라다니는 iPadOS식 미니멀 섀도우 트레일러 -->
+    <div id="magic-cursor-halo"></div>
+
+    <!-- OS 데스크톱 레이아웃 -->
+    <div id="desktop">
+        <!-- 1. Apple 스타일 미니멀 상단 상태바 -->
+        <header id="status-bar">
+            <div class="status-left">
+                <span class="material-symbols-rounded logo-icon">near_me</span>
+                <span class="system-title">MagicPointer</span>
+                <button id="guide-open-btn" class="status-btn">도움말</button>
             </div>
-            <p class="subtitle">Google DeepMind AI Interaction Paradigm Simulation</p>
-            <div class="header-actions">
-                <a href="ai-os/index.html" class="launch-os-btn"><span class="material-symbols-rounded">desktop_windows</span>MagicOS 데스크톱 실행</a>
-                <div class="status-indicator">
-                    <span class="status-dot pulsing"></span>
-                    <span class="status-text">AI Cursor Engine: Active</span>
+            <div class="status-center" id="system-clock">오후 12:00</div>
+            <div class="status-right">
+                <div class="status-widget" id="widget-memory">
+                    <span class="material-symbols-rounded">memory</span>
+                    <span id="memory-text">-- MB</span>
+                </div>
+                <div class="status-widget" id="widget-theme">
+                    <span class="material-symbols-rounded theme-icon">light_mode</span>
                 </div>
             </div>
         </header>
 
-        <main class="simulation-grid">
-            <!-- 1. Travel Image Element -->
-            <section class="sim-card card-image" data-ai-type="image" data-ai-title="Dongdaemun Design Plaza (DDP)" data-ai-desc="Futuristic architectural landmark in Seoul designed by Zaha Hadid.">
-                <div class="card-media">
-                    <img src="assets/travel.png?v=ddp3" alt="Dongdaemun Design Plaza (DDP) at Night" loading="lazy">
-                    <div class="media-overlay"></div>
-                    <span class="context-tag"><span class="material-symbols-rounded">image</span>Image Context</span>
+        <!-- 2. 단정하고 세련된 바탕화면 아이콘 그리드 -->
+        <div id="desktop-grid">
+            <div class="desktop-shortcut" data-app="notes">
+                <div class="shortcut-icon icon-code">
+                    <span class="material-symbols-rounded" style="font-size:26px;">edit_note</span>
                 </div>
-                <div class="card-content">
-                    <h3>동대문디자인플라자 (DDP)</h3>
-                    <p class="location"><span class="material-symbols-rounded">location_on</span>서울 중구 을지로</p>
-                    <p class="description">세계 최대 규모의 3차원 비정형 건축물로, 혁신적인 미래형 우주선 디자인을 갖춘 서울의 랜드마크이자 글로벌 문화/예술/패션 허브입니다.</p>
-                </div>
-                <div class="scan-overlay"></div>
-            </section>
-
-            <!-- 2. Complex English Text Element -->
-            <section class="sim-card card-text" data-ai-type="text" data-ai-title="AI Interaction Principle" data-ai-desc="Text segment regarding deep visual-linguistic grounding.">
-                <div class="card-header">
-                    <span class="context-tag"><span class="material-symbols-rounded">article</span>Text Context</span>
-                </div>
-                <div class="card-content">
-                    <h3>DeepMind Interaction Model</h3>
-                    <div class="text-body-wrapper">
-                        <p class="text-body">
-                            "Google DeepMind's new interaction paradigm proposes that mouse pointers should act as context-aware lenses. Instead of manually copying text or uploading images, the pointer itself senses the semantic boundary under it, interprets the content (multimodal visual-linguistic context), and projects intent-driven action widgets. By leveraging real-time vision-language models, the cursor dynamically morphs to indicate high-probability micro-actions, thereby bypassing traditional prompt engineering bar."
-                        </p>
-                    </div>
-                </div>
-                <div class="scan-overlay"></div>
-            </section>
-
-            <!-- 3. Weather Widget Element -->
-            <section class="sim-card card-weather" data-ai-type="weather" data-ai-title="Seoul Weather Forecast" data-ai-desc="Dynamic meteorological metrics tracking high humidity and fine dust.">
-                <span class="context-tag"><span class="material-symbols-rounded">thermostat</span>Data Context</span>
-                <div class="weather-location" style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 4px;">
-                    <span class="material-symbols-rounded" style="font-size: 0.85rem; color: var(--warning-color);">location_on</span>
-                    <span class="location-name">서울 노원구 월계동 (광운인공지능고 관측)</span>
-                </div>
-                <div class="weather-display">
-                    <div class="weather-temp">
-                        <h2>26<span>°C</span></h2>
-                        <span class="weather-icon material-symbols-rounded animate-spin-slow">dark_mode</span>
-                    </div>
-                    <div class="weather-details">
-                        <p class="weather-condition">Partly Cloudy (Night)</p>
-                        <div class="weather-metrics">
-                            <span class="metric"><span class="material-symbols-rounded">water_drop</span> 72%</span>
-                            <span class="metric"><span class="material-symbols-rounded">air</span> 3.2m/s</span>
-                            <span class="metric"><span class="material-symbols-rounded">grain</span> PM2.5: Good</span>
-                        </div>
-                        <div class="weather-update-time" style="font-size: 0.65rem; color: var(--text-secondary); margin-top: 0.5rem; opacity: 0.7; font-family: var(--font-mono);">
-                            실시간 관측: <span class="weather-time-stamp">-</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="scan-overlay"></div>
-            </section>
-
-            <!-- 4. Futuristic Product Element -->
-            <section class="sim-card card-product" data-ai-type="product" data-ai-title="Apple Vision Pro" data-ai-desc="Apple's spatial computing headset blending digital content with physical space.">
-                <div class="card-media-product">
-                    <img src="assets/product.png?v=vision2" alt="Apple Vision Pro spatial computer" loading="lazy">
-                    <div class="media-overlay"></div>
-                    <span class="context-tag"><span class="material-symbols-rounded">shopping_bag</span>Product Context</span>
-                </div>
-                <div class="card-content">
-                    <div class="product-header">
-                        <h3>Apple Vision Pro</h3>
-                        <span class="price">$3,499.00</span>
-                    </div>
-                    <p class="description">애플의 공간 컴퓨터로, 디지털 콘텐츠와 물리적인 공간을 조화롭게 융합하여 혁신적인 3차원 사용자 인터페이스 및 초고해상도 디스플레이 경험을 선사합니다.</p>
-                </div>
-                <div class="scan-overlay"></div>
-            </section>
-
-            <!-- 5. YouTube Video Element -->
-            <section class="sim-card card-youtube" data-ai-type="youtube" data-ai-title="Figure Status Update - OpenAI Speech-to-Speech Reasoning" data-ai-desc="Demo video of Figure 01 robot performing actions using OpenAI reasoning model.">
-                <div class="card-media-youtube">
-                    <img src="assets/youtube.png" alt="Figure 01 Humanoid Robot Demo" loading="lazy">
-                    <div class="video-play-overlay">
-                        <span class="material-symbols-rounded play-btn-icon">play_circle</span>
-                    </div>
-                    <span class="video-duration">2:35</span>
-                    <span class="context-tag"><span class="material-symbols-rounded">play_arrow</span>Video Context</span>
-                </div>
-                <div class="card-content">
-                    <h3>Figure Status Update - OpenAI Speech-to-Speech Reasoning</h3>
-                    <p class="channel-info">Figure • 7.5M views • 1 year ago</p>
-                </div>
-                <div class="scan-overlay"></div>
-            </section>
-
-            <!-- 6. Tech News Element -->
-            <section class="sim-card card-news" data-ai-type="news" data-ai-title="Green Energy Transition" data-ai-desc="News report analyzing clean energy milestones.">
-                <div class="card-media-news">
-                    <img src="assets/news.png" alt="Green Energy Grid" loading="lazy">
-                    <span class="context-tag"><span class="material-symbols-rounded">newspaper</span>News Context</span>
-                </div>
-                <div class="card-content">
-                    <span class="news-source">Scientific Horizon Daily</span>
-                    <h3>Global Green Energy Transition Reaches Critical Milestone</h3>
-                    <p class="description">Renewable energy installations have officially surpassed fossil fuel deployment in major grids for the first quarter, signaling a faster pivot than previously projected by models.</p>
-                </div>
-                <div class="scan-overlay"></div>
-            </section>
-
-            <!-- 7. SK Hynix Stock Element -->
-            <section class="sim-card card-stock" data-ai-type="stock" data-ai-title="SK Hynix Market Data" data-ai-desc="Financial asset tracker showing ticker metrics.">
-                <span class="context-tag"><span class="material-symbols-rounded">monitoring</span>Market Context</span>
-                <div class="stock-header">
-                    <div class="stock-name">
-                        <div style="display: flex; align-items: center;">
-                            <h3>000660</h3>
-                            <span class="market-status-badge closed">● 장마감</span>
-                        </div>
-                        <span class="stock-company">SK하이닉스</span>
-                    </div>
-                    <div class="stock-price-group">
-                        <span class="stock-price">₩2,382,000</span>
-                        <span class="stock-change up"><span class="material-symbols-rounded">trending_up</span>+4.11%</span>
-                    </div>
-                </div>
-                <!-- SVG line chart representing 7 days stock movement -->
-                <div class="stock-chart-container">
-                    <svg class="stock-svg" viewBox="0 0 300 100">
-                        <defs>
-                            <linearGradient id="chart-glow" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="var(--success-color)" stop-opacity="0.3"/>
-                                <stop offset="100%" stop-color="var(--success-color)" stop-opacity="0.0"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Chart Area Shading -->
-                        <path class="chart-area" d="M 0 100 Q 50 85, 100 90 T 200 40 T 300 10 L 300 100 Z" fill="url(#chart-glow)"/>
-                        <!-- Chart Line -->
-                        <path class="chart-line" d="M 0 100 Q 50 85, 100 90 T 200 40 T 300 10" fill="none" stroke="var(--success-color)" stroke-width="3"/>
-                        <!-- Interactive Dot on the peak -->
-                        <circle cx="300" cy="10" r="5" fill="var(--success-color)" class="chart-point"/>
-                    </svg>
-                </div>
-                <div class="scan-overlay"></div>
-            </section>
-        </main>
-
-        <!-- Guide Panel -->
-        <footer class="app-instructions">
-            <div class="instruction-step">
-                <span class="step-num">01</span>
-                <p>Move your mouse cursor over any card elements.</p>
+                <span class="shortcut-label">메모장</span>
             </div>
-            <div class="instruction-step">
-                <span class="step-num">02</span>
-                <p>Hover for <strong>600ms</strong> to trigger the AI visual scanning animation.</p>
+            <div class="desktop-shortcut" data-app="mail">
+                <div class="shortcut-icon icon-matrix">
+                    <span class="material-symbols-rounded" style="font-size:26px;">mail</span>
+                </div>
+                <span class="shortcut-label">메일함</span>
             </div>
-            <div class="instruction-step">
-                <span class="step-num">03</span>
-                <p>Once scanned, the cursor morphs. <strong>Click</strong> to open the context-aware action menu.</p>
+            <div class="desktop-shortcut" data-app="wallet">
+                <div class="shortcut-icon icon-doc">
+                    <span class="material-symbols-rounded" style="font-size:26px;">account_balance_wallet</span>
+                </div>
+                <span class="shortcut-label">가계부</span>
             </div>
-        </footer>
+        </div>
+
+        <!-- 3. Floating Glassmorphic Windows (Apple 미니멀 디자인 뼈대) -->
+        
+        <!-- App A: 메모장 (Notes - 2컬럼 레이아웃 구조 마감) -->
+        <div id="win-notes" class="window window-glass open" style="top: 90px; left: 120px; width: 440px; height: 320px; z-index: 101;">
+            <div class="window-title-bar">
+                <div class="window-controls-left">
+                    <span class="win-dot dot-close"></span>
+                    <span class="win-dot dot-minimize"></span>
+                    <span class="win-dot dot-expand"></span>
+                </div>
+                <div class="window-drag-handle">
+                    <span class="window-title">메모장</span>
+                </div>
+            </div>
+            <div class="window-content" style="padding:0; display:flex; height: calc(100% - 38px);">
+                <!-- 왼쪽 폴더 사이드바 (디자인 프레임) -->
+                <div class="notes-sidebar" style="width: 130px; border-right: 1px solid var(--border-inner); background: var(--bg-sidebar); padding: 12px; display:flex; flex-direction:column; gap:8px;">
+                    <div style="width:100%; height:18px; background:var(--skel-base); border-radius:4px;"></div>
+                    <div style="width:85%; height:18px; background:var(--skel-light); border-radius:4px;"></div>
+                    <div style="width:90%; height:18px; background:var(--skel-light); border-radius:4px;"></div>
+                </div>
+                <div class="notes-body" style="flex:1; padding:18px; display:flex; flex-direction:column; gap:12px;">
+                    <div style="width:65%; height:22px; background:var(--skel-strong); border-radius:4px; margin-bottom:8px;"></div>
+                    <div style="width:100%; height:14px; background:var(--skel-light); border-radius:3px;"></div>
+                    <div style="width:95%; height:14px; background:var(--skel-light); border-radius:3px;"></div>
+                    <div style="width:98%; height:14px; background:var(--skel-light); border-radius:3px;"></div>
+                    <div style="width:40%; height:14px; background:var(--skel-light); border-radius:3px;"></div>
+                </div>
+            </div>
+            <div class="window-resizer"></div>
+        </div>
+
+        <!-- App B: 메일함 (Mail - 스켈레톤 리스트 뷰 구조 마감) -->
+        <div id="win-mail" class="window window-glass open" style="top: 150px; left: 580px; width: 440px; height: 350px; z-index: 102;">
+            <div class="window-title-bar">
+                <div class="window-controls-left">
+                    <span class="win-dot dot-close"></span>
+                    <span class="win-dot dot-minimize"></span>
+                    <span class="win-dot dot-expand"></span>
+                </div>
+                <div class="window-drag-handle">
+                    <span class="window-title">수신 이메일</span>
+                </div>
+            </div>
+            <div class="window-content" style="padding: 0;">
+                <div class="mail-list" style="display: flex; flex-direction: column;">
+                    <!-- 메일 아이템 스켈레톤 1 -->
+                    <div class="mail-item" style="padding: 16px; border-bottom: 1px solid var(--border-inner); display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items:center;">
+                            <div style="width:30%; height:14px; background:var(--skel-strong); border-radius:3px;"></div>
+                            <div style="width:15%; height:12px; background:var(--skel-light); border-radius:3px;"></div>
+                        </div>
+                        <div style="width:75%; height:15px; background:var(--skel-base); border-radius:3px;"></div>
+                        <div style="width:95%; height:12px; background:var(--skel-faint); border-radius:3px;"></div>
+                    </div>
+                    <div class="mail-item" style="padding: 16px; border-bottom: 1px solid var(--border-inner); display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items:center;">
+                            <div style="width:25%; height:14px; background:var(--skel-strong); border-radius:3px;"></div>
+                            <div style="width:15%; height:12px; background:var(--skel-light); border-radius:3px;"></div>
+                        </div>
+                        <div style="width:60%; height:15px; background:var(--skel-base); border-radius:3px;"></div>
+                        <div style="width:90%; height:12px; background:var(--skel-faint); border-radius:3px;"></div>
+                    </div>
+                    <div class="mail-item" style="padding: 16px; border-bottom: 1px solid var(--border-inner); display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items:center;">
+                            <div style="width:35%; height:14px; background:var(--skel-strong); border-radius:3px;"></div>
+                            <div style="width:15%; height:12px; background:var(--skel-light); border-radius:3px;"></div>
+                        </div>
+                        <div style="width:80%; height:15px; background:var(--skel-base); border-radius:3px;"></div>
+                        <div style="width:85%; height:12px; background:var(--skel-faint); border-radius:3px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="window-resizer"></div>
+        </div>
+
+        <!-- App C: 가계부 (Wallet - 차트 및 표 구조 뼈대 마감) -->
+        <div id="win-wallet" class="window window-glass" style="top: 260px; left: 240px; width: 440px; height: 320px;">
+            <div class="window-title-bar">
+                <div class="window-controls-left">
+                    <span class="win-dot dot-close"></span>
+                    <span class="win-dot dot-minimize"></span>
+                    <span class="win-dot dot-expand"></span>
+                </div>
+                <div class="window-drag-handle">
+                    <span class="window-title">가계부 지출 대장</span>
+                </div>
+            </div>
+            <div class="window-content" style="padding: 16px; display:flex; flex-direction:column; gap:16px;">
+                <!-- 차트 플레이스홀더 영역 (순수 CSS 3D 도넛/바 형태 비주얼) -->
+                <div class="wallet-chart-area" style="height: 100px; border-radius: 10px; background: var(--skel-subtle); border:1px solid var(--border-inner); display:flex; align-items:center; justify-content:space-around; padding: 0 20px;">
+                    <div style="display:flex; align-items:flex-end; gap:15px; height:70px; width:45%;">
+                        <div style="width:12px; height:40%; background:var(--chart-bar-1); border-radius:3px;"></div>
+                        <div style="width:12px; height:75%; background:var(--chart-bar-3); border-radius:3px;"></div>
+                        <div style="width:12px; height:25%; background:var(--chart-bar-4); border-radius:3px;"></div>
+                        <div style="width:12px; height:90%; background:var(--chart-bar-2); border-radius:3px;"></div>
+                    </div>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding-left:20px;">
+                        <div style="width:50%; height:14px; background:var(--skel-base); border-radius:3px;"></div>
+                        <div style="width:80%; height:18px; background:var(--skel-strong); border-radius:4px;"></div>
+                    </div>
+                </div>
+
+                <!-- 표 뼈대 구조 (데이터 제거) -->
+                <div class="spec-table-wrapper">
+                    <table class="spec-table" id="wallet-table">
+                        <thead>
+                            <tr>
+                                <th>구분 항목</th>
+                                <th>카테고리</th>
+                                <th>금액 (원)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 비어있는 슬롯 3개 -->
+                            <tr>
+                                <td><div style="width:60%; height:12px; background:var(--skel-base); border-radius:3px;"></div></td>
+                                <td><div style="width:40%; height:12px; background:var(--skel-light); border-radius:3px;"></div></td>
+                                <td><div style="width:50%; height:12px; background:var(--skel-base); border-radius:3px;"></div></td>
+                            </tr>
+                            <tr>
+                                <td><div style="width:50%; height:12px; background:var(--skel-base); border-radius:3px;"></div></td>
+                                <td><div style="width:45%; height:12px; background:var(--skel-light); border-radius:3px;"></div></td>
+                                <td><div style="width:40%; height:12px; background:var(--skel-base); border-radius:3px;"></div></td>
+                            </tr>
+                            <tr>
+                                <td><div style="width:70%; height:12px; background:var(--skel-base); border-radius:3px;"></div></td>
+                                <td><div style="width:30%; height:12px; background:var(--skel-light); border-radius:3px;"></div></td>
+                                <td><div style="width:60%; height:12px; background:var(--skel-base); border-radius:3px;"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="window-resizer"></div>
+        </div>
+
+        <!-- 4. 데스크톱 사용 안내 힌트 바 -->
+        <div id="desktop-instructions">
+            <span class="material-symbols-rounded info-icon">info</span>
+            <p>바탕화면의 창들을 잡고 마우스로 자유롭게 드래그하거나 모서리를 잡아 크기를 조절해 보십시오.</p>
+        </div>
+
+        <!-- 5. Bottom centered OS Dock -->
+        <nav id="dock-bar">
+            <div class="dock-container">
+                <div class="dock-item running focused" data-app="notes" data-tooltip="메모장">
+                    <span class="material-symbols-rounded">edit_note</span>
+                    <span class="dock-indicator"></span>
+                </div>
+                <div class="dock-item running" data-app="mail" data-tooltip="메일함">
+                    <span class="material-symbols-rounded">mail</span>
+                    <span class="dock-indicator"></span>
+                </div>
+                <div class="dock-item" data-app="wallet" data-tooltip="가계부">
+                    <span class="material-symbols-rounded">account_balance_wallet</span>
+                    <span class="dock-indicator"></span>
+                </div>
+            </div>
+        </nav>
     </div>
 
-    <!-- Dynamic AI Popup Menu (Follows the mouse on click) -->
-    <div id="ai-popup-menu" class="hidden">
-        <div class="popup-header">
-            <span class="material-symbols-rounded header-icon">psychology</span>
-            <span class="popup-title">AI Quick Actions</span>
+    <!-- Apple Style Notification Alert Banner (데모용 뼈대) -->
+    <div id="system-notification" class="notification-hidden">
+        <div class="notification-header">
+            <div style="display:flex; align-items:center; gap:6px;">
+                <span class="material-symbols-rounded" style="font-size:16px; color:var(--primary-color);">notifications</span>
+                <span style="font-size:0.72rem; font-weight:700; color:var(--text-secondary);">알림</span>
+            </div>
+            <span style="font-size:0.65rem; color:var(--text-muted);">방금 전</span>
         </div>
-        <div id="popup-actions-list">
-            <!-- Buttons dynamically generated by JavaScript -->
+        <div class="notification-body" id="notification-message">
+            알림 영역 데모 메시지입니다.
         </div>
     </div>
 
-    <!-- AI Response Modal (Slides in beautifully to show mock execution results) -->
-    <div id="ai-response-modal" class="hidden">
-        <div class="modal-backdrop"></div>
-        <div class="modal-card">
+    <!-- Guide Modal -->
+    <div id="guide-modal" class="hidden">
+        <div class="modal-backdrop" id="guide-backdrop"></div>
+        <div class="modal-card guide-card">
             <div class="modal-header">
                 <div class="modal-title-group">
-                    <span class="material-symbols-rounded modal-icon">auto_awesome</span>
-                    <h3 id="modal-title">AI Processing</h3>
+                    <span class="material-symbols-rounded modal-icon">near_me</span>
+                    <h3>MagicPointer 도움말</h3>
                 </div>
-                <button id="close-modal-btn" class="material-symbols-rounded">close</button>
+                <button id="close-guide-btn" class="close-btn"><span class="material-symbols-rounded">close</span></button>
             </div>
-            <div class="modal-body">
-                <div id="modal-loader" class="hidden">
-                    <div class="loader-spinner"></div>
-                    <p>Analyzing context details and generating solution...</p>
+            <div class="modal-body guide-content">
+                <p class="guide-intro">MagicPointer의 기본 조작 방법을 안내합니다.</p>
+                
+                <div class="guide-steps">
+                    <div class="guide-step-item">
+                        <div class="step-badge"><span class="material-symbols-rounded">drag_pan</span></div>
+                        <div class="step-text">
+                            <h4>창 이동</h4>
+                            <p>각 창의 상단 타이틀바를 드래그하여 자유롭게 위치를 변경할 수 있습니다.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-step-item">
+                        <div class="step-badge"><span class="material-symbols-rounded">aspect_ratio</span></div>
+                        <div class="step-text">
+                            <h4>창 크기 조절</h4>
+                            <p>창의 우측 하단 모서리를 드래그하여 크기를 조절할 수 있습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="guide-step-item">
+                        <div class="step-badge"><span class="material-symbols-rounded">palette</span></div>
+                        <div class="step-text">
+                            <h4>테마 전환</h4>
+                            <p>상단 바의 테마 아이콘을 클릭하면 라이트/다크 모드를 전환합니다.</p>
+                        </div>
+                    </div>
                 </div>
-                <div id="modal-result" class="hidden">
-                    <!-- Results dynamically generated -->
+
+                <div class="guide-footer-btns">
+                    <button id="guide-close-confirm-btn" class="guide-btn-primary"><span class="material-symbols-rounded">check</span>확인</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
-    <script>
-        // 임베디드 모드 (OS 서브윈도우 내부 iframe) 대응
-        if (window.self !== window.top) {
-            document.body.classList.add('embedded-mode');
-            
-            // 부모 창의 테마(light-theme) 상태를 감지하여 동기화
-            if (window.parent && window.parent.document.body.classList.contains('light-theme')) {
-                document.body.classList.add('light-theme');
-            }
-            
-            // iframe 내 마우스 움직임을 부모 창(OS)의 커서 좌표계로 프레임 브릿지 전달
-            window.addEventListener('mousemove', (e) => {
-                if (window.frameElement) {
-                    const rect = window.frameElement.getBoundingClientRect();
-                    const parentX = e.clientX + rect.left;
-                    const parentY = e.clientY + rect.top;
-                    
-                    if (window.parent && typeof window.parent.updateMouseCoordinates === 'function') {
-                        window.parent.updateMouseCoordinates(parentX, parentY);
-                    }
-                }
-            });
-
-            // iframe 내부 클릭 시 부모 창의 열려있는 팝업이나 메뉴를 닫도록 이벤트 위임
-            window.addEventListener('mousedown', () => {
-                if (window.parent && typeof window.parent.closeAllPopups === 'function') {
-                    window.parent.closeAllPopups();
-                }
-            });
-        }
-    </script>
+    <!-- Main Entry Script -->
+    <script type="module" src="app.js"></script>
 </body>
 </html>
