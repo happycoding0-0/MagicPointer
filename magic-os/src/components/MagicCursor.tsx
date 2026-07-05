@@ -16,7 +16,7 @@ export default function MagicCursor() {
   const haloY = useSpring(0, { stiffness: 500, damping: 28 });
 
   const activeTargetRef = useRef<HTMLElement | null>(null);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
 
   useEffect(() => {
     const updateCursor = () => {
