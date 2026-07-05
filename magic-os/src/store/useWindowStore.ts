@@ -38,7 +38,7 @@ interface WindowStore {
 
 let nextZIndex = 100;
 
-let initialLanguage: 'en' | 'ko' = 'en';
+let initialLanguage: 'en' | 'ko' = 'ko';
 
 export const useWindowStore = create<WindowStore>((set) => ({
   windows: [],
