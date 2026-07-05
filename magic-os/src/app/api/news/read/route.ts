@@ -67,6 +67,6 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error("News Reader API Error:", error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : 'Internal server error' }, { status: 500 });
   }
 }

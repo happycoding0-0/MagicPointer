@@ -15,7 +15,14 @@ interface NewsReaderProps {
   t: any;
 }
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || `HTTP error ${res.status}`);
+  }
+  return res.json();
+};
 
 export default function NewsReader({ article, onClose, t }: NewsReaderProps) {
   const { data: readerContent, error, isLoading } = useSWR(
@@ -50,7 +57,9 @@ export default function NewsReader({ article, onClose, t }: NewsReaderProps) {
         ) : error ? (
            <div className="p-6 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl border border-red-100 dark:border-red-900/50">
              <span className="material-symbols-rounded text-3xl mb-2">error</span>
-             <p className="font-medium">Network Error</p>
+             <p className="font-medium">기사를 불러오지 못했습니다.</p>
+             <p className="text-sm mt-2 opacity-80">{error.message || "Network Error"}</p>
+             <p className="text-sm mt-4">우측 상단의 'Original' 버튼을 눌러 원본 사이트에서 확인해 주세요.</p>
            </div>
         ) : readerContent ? (
           <div className="animate-in fade-in duration-500 pb-20">
