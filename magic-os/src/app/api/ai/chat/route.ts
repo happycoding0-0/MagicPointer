@@ -121,7 +121,7 @@ System Language: ${osContext?.systemLanguage || 'en'}
                     },
                   ],
                 },
-              ],
+              ] as any,
               temperature: 0.7,
             },
           });
