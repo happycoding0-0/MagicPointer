@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { NextResponse } from "next/server";
 import { APPS } from "@/config/apps.config"; // 100% 동적 라우팅을 위한 앱 레지스트리 임포트
 
@@ -22,14 +22,14 @@ const getOSTools = () => [
         name: 'openApp',
         description: 'Opens a specific app in the OS.',
         parameters: {
-          type: 'OBJECT',
+          type: Type.OBJECT,
           properties: {
             appId: {
-              type: 'STRING',
+              type: Type.STRING,
               description: `ID of the app to open. Available apps: ${availableAppsList}.`,
             },
             payload: {
-              type: 'STRING',
+              type: Type.STRING,
               description: 'CRITICAL: If the user wants to search for something (e.g., news topic, stock name, location, video, music), you MUST provide the search keyword here. (e.g. "삼성전자", "뉴욕", "아이유"). Do not leave empty if a topic is mentioned.',
             },
           },
@@ -40,10 +40,10 @@ const getOSTools = () => [
         name: 'createFile',
         description: 'Creates a new file in the Virtual File System.',
         parameters: {
-          type: 'OBJECT',
+          type: Type.OBJECT,
           properties: {
-            path: { type: 'STRING', description: 'Full path of the file (e.g. /Documents/memo.txt)' },
-            content: { type: 'STRING', description: 'Text content to write into the file' }
+            path: { type: Type.STRING, description: 'Full path of the file (e.g. /Documents/memo.txt)' },
+            content: { type: Type.STRING, description: 'Text content to write into the file' }
           },
           required: ['path', 'content'],
         },

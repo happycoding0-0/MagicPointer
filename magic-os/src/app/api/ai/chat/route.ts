@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI, Type } from '@google/genai';
 import { APPS } from '@/config/apps.config';
 
 export const runtime = 'edge';
@@ -61,14 +61,14 @@ System Language: ${osContext?.systemLanguage || 'en'}
                       name: 'openApp',
                       description: 'Opens a specific app in the OS.',
                       parameters: {
-                        type: 'OBJECT',
+                        type: Type.OBJECT,
                         properties: {
                           appId: {
-                            type: 'STRING',
+                            type: Type.STRING,
                             description: `ID of the app to open. Available apps: ${APPS.map(app => `'${app.id}' (${app.name})`).join(', ')}`,
                           },
                           payload: {
-                            type: 'STRING',
+                            type: Type.STRING,
                             description: 'Optional payload/search query to pass to the app (e.g., a stock ticker like AAPL, a location like Tokyo, a YouTube search query)',
                           },
                         },
@@ -79,9 +79,9 @@ System Language: ${osContext?.systemLanguage || 'en'}
                       name: 'closeApp',
                       description: 'Closes a specific app in the OS.',
                       parameters: {
-                        type: 'OBJECT',
+                        type: Type.OBJECT,
                         properties: {
-                          appId: { type: 'STRING' },
+                          appId: { type: Type.STRING },
                         },
                         required: ['appId'],
                       },
@@ -90,9 +90,9 @@ System Language: ${osContext?.systemLanguage || 'en'}
                       name: 'maximizeApp',
                       description: 'Maximizes a specific app window to full screen.',
                       parameters: {
-                        type: 'OBJECT',
+                        type: Type.OBJECT,
                         properties: {
-                          appId: { type: 'STRING' },
+                          appId: { type: Type.STRING },
                         },
                         required: ['appId'],
                       },
@@ -101,9 +101,9 @@ System Language: ${osContext?.systemLanguage || 'en'}
                       name: 'changeTheme',
                       description: 'Changes the OS global theme.',
                       parameters: {
-                        type: 'OBJECT',
+                        type: Type.OBJECT,
                         properties: {
-                          theme: { type: 'STRING', description: "Either 'light' or 'dark'" },
+                          theme: { type: Type.STRING, description: "Either 'light' or 'dark'" },
                         },
                         required: ['theme'],
                       },
@@ -112,9 +112,9 @@ System Language: ${osContext?.systemLanguage || 'en'}
                       name: 'searchWeb',
                       description: 'Opens the Web Browser app and navigates to the search query or URL.',
                       parameters: {
-                        type: 'OBJECT',
+                        type: Type.OBJECT,
                         properties: {
-                          query: { type: 'STRING', description: 'The search query or full URL' },
+                          query: { type: Type.STRING, description: 'The search query or full URL' },
                         },
                         required: ['query'],
                       },
