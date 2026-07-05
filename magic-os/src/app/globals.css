@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #030712;
+  --primary-color: #4285f4;
+  --success-color: #34a853;
+  --warning-color: #fbbc05;
+  --danger-color: #ea4335;
+  --purple-color: #a142f4;
+  --cyan-color: #00e5ff;
+  
+  /* Light Theme Defaults (Bright Background) */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  --os-base-bg: #f8fafc;
+}
+
+/* Dark Theme Overrides */
+.dark, body.dark-theme {
+  --glass-bg: rgba(15, 20, 30, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --os-base-bg: #050814;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans), 'Outfit', sans-serif;
+  --font-heading: var(--font-heading), 'Space Grotesk', sans-serif;
+  --font-mono: var(--font-mono), 'Fira Code', monospace;
+}
+
+body.dark-theme {
+  background-color: var(--bg-color);
+  color: #f8fafc;
+  overflow: hidden;
+  user-select: none;
+  cursor: none !important;
+}
+
+/* Dynamic Premium Background */
+@keyframes ambient-drift {
+  0% { transform: scale(1) translate(0, 0); }
+  33% { transform: scale(1.1) translate(3%, 2%); }
+  66% { transform: scale(0.95) translate(-2%, 4%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.os-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--os-base-bg);
+  overflow: hidden;
+  transition: background 0.5s ease;
+}
+
+.os-background::before, .os-background::after {
+  content: '';
+  position: absolute;
+  width: 150vw;
+  height: 150vh;
+  top: -25vh;
+  left: -25vw;
+  background: 
+    radial-gradient(circle at 30% 50%, rgba(66, 133, 244, 0.08), transparent 40%),
+    radial-gradient(circle at 70% 30%, rgba(161, 66, 244, 0.08), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(0, 229, 255, 0.05), transparent 50%);
+  animation: ambient-drift 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.os-background::after {
+  background: 
+    radial-gradient(circle at 80% 60%, rgba(234, 67, 53, 0.05), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(52, 168, 83, 0.05), transparent 40%);
+  animation-delay: -10s;
+  animation-duration: 25s;
+}
+
+/* Premium Glassmorphism (Dynamic based on Theme) */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Micro-animations */
+.hover-glow {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-glow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+/* Pulse Animation for Status */
+@keyframes pulse-dot {
+  0% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(52, 168, 83, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0); }
+}
+.status-dot-pulse {
+  animation: pulse-dot 2s infinite;
+}
+
+/* macOS Style Dock Hover Effects */
+.dock-item {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dock-item:hover {
+  transform: scale(1.25) translateY(-8px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+/* Neighboring dock items scale slightly */
+.dock-item:hover + .dock-item {
+  transform: scale(1.1) translateY(-4px);
+}
+.dock-item:has(+ .dock-item:hover) {
+  transform: scale(1.1) translateY(-4px);
+}
+
+/* ==========================================
+   OS Global Scrollbar (macOS Style)
+========================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.6);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(150, 150, 150, 0.3) transparent;
+}
