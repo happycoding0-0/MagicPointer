@@ -103,8 +103,8 @@ export default function AIPalette() {
     setResponse(null);
 
     // Build OS Context
-    const openApps = windows.map(w => w.appId);
-    let vfsFolders = [];
+    const openApps = windows.map(w => w.id);
+    let vfsFolders: any[] = [];
     try {
       const rootItems = await vfs.listFolder("");
       vfsFolders = rootItems.map(item => item.name);

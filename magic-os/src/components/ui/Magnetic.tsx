@@ -1,13 +1,14 @@
 "use client";
 
-import { HTMLAttributes, ReactNode } from "react";
+import React, { HTMLAttributes, ReactNode, ElementType } from "react";
 
-interface MagneticProps extends HTMLAttributes<HTMLDivElement> {
+interface MagneticProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
   radius?: string | number;
   color?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
   className?: string;
+  type?: string;
 }
 
 export default function Magnetic({
@@ -25,7 +26,7 @@ export default function Magnetic({
       data-magnetic-radius={radius}
       data-magnetic-color={color}
       className={`${className} cursor-none`}
-      {...props}
+      {...(props as any)}
     >
       {children}
     </Component>
