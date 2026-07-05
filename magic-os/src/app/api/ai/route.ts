@@ -88,7 +88,7 @@ export async function POST(req: Request) {
 
     // 구글 최신 Interactions API 및 gemini-3.1-flash-lite 모델 호출 (15초 타임아웃)
     const generatePromise = ai.models.generateContent({
-      model: "gemini-3.1-flash-lite",
+      model: "gemini-2.5-flash",
       contents: contents,
       config: {
         systemInstruction: dynamicSystemPrompt,

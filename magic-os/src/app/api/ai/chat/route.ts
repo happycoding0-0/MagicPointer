@@ -50,7 +50,7 @@ System Language: ${osContext?.systemLanguage || 'en'}
       async start(controller) {
         try {
           const responseStream = await ai.models.generateContentStream({
-            model: 'gemini-1.5-flash',
+            model: 'gemini-2.5-flash',
             contents,
             config: {
               systemInstruction,

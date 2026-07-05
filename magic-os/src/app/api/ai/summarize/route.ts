@@ -27,7 +27,7 @@ Respond in Korean.`;
       async start(controller) {
         try {
           const responseStream = await ai.models.generateContentStream({
-            model: "gemini-3.1-flash-lite", // 통일성 유지 및 안정성
+            model: "gemini-2.5-flash", // 통일성 유지 및 안정성
             contents: [{ role: "user", parts: [{ text: prompt }] }], // 엄격한 포맷팅 적용
             config: {
               temperature: 0.3,
